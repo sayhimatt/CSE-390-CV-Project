@@ -3,23 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_planner">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.guidi.coronavirus.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_planner" />
+        android:id="@+id/navigation_planner"
+        android:name="com.guidi.coronavirus.ui.planner.PlannerFragment"
+        android:label="@string/title_planner"
+        tools:layout="@layout/planner_fragment" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.guidi.coronavirus.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_achievements" />
+        android:id="@+id/navigation_fun"
+        android:name="com.guidi.coronavirus.ui.achievements.AchievementsFragment"
+        android:label="@string/title_fun"
+        tools:layout="@layout/achievements_fragment" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.guidi.coronavirus.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_fun" />
+        android:id="@+id/navigation_achievements"
+        android:name="com.guidi.coronavirus.ui.fun.FunFragment"
+        android:label="@string/title_achievements"
+        tools:layout="@layout/fun_fragment" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:label="Settings"
+        android:name="com.guidi.coronavirus.ui.settings.Settings"
+        tools:layout="@layout/settings_fragment"/>
 </navigation>

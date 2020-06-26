@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.notifications;
+package com.guidi.coronavirus.ui.planner;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.guidi.coronavirus.R;
 
-public class NotificationsFragment extends Fragment {
+public class PlannerFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private PlannerViewModel plannerViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_fun, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        plannerViewModel =
+                ViewModelProviders.of(this).get(PlannerViewModel.class);
+        View root = inflater.inflate(R.layout.planner_fragment, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
+        plannerViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

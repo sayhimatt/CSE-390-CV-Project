@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.home;
+package com.guidi.coronavirus.ui.achievements;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.guidi.coronavirus.R;
 
-public class HomeFragment extends Fragment {
+public class AchievementsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private AchievementsViewModel achievementsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_planner, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        achievementsViewModel =
+                ViewModelProviders.of(this).get(AchievementsViewModel.class);
+        View root = inflater.inflate(R.layout.achievements_fragment, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        achievementsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

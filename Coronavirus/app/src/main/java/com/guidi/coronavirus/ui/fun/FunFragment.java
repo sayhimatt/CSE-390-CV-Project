@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.dashboard;
+package com.guidi.coronavirus.ui.fun;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.guidi.coronavirus.R;
 
-public class DashboardFragment extends Fragment {
+public class FunFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private FunViewModel funViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_achievements, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        funViewModel =
+                ViewModelProviders.of(this).get(FunViewModel.class);
+        View root = inflater.inflate(R.layout.fun_fragment, container, false);
+        final TextView textView = root.findViewById(R.id.text_notifications);
+        funViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
