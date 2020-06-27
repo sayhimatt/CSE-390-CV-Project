@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "268761451293",
+    "firebase_url": "https://coronavirus-91788.firebaseio.com",
+    "project_id": "coronavirus-91788",
+    "storage_bucket": "coronavirus-91788.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268761451293:android:24fee7a67ff195eeb12ff4",
+        "android_client_info": {
+          "package_name": "com.guidi.coronavirus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268761451293-5j6sjqafrb02p0ntku3agdi7haatinp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guidi.coronavirus",
+            "certificate_hash": "dc8da00a12b214ee13757b1d780f43c8cd0c09d9"
+          }
+        },
+        {
+          "client_id": "268761451293-f9khrigqsrq0n0imrfughc6j14avfihu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHpbdJK6ioQ32W5SPf9uLnj5JL-GxTlvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268761451293-f9khrigqsrq0n0imrfughc6j14avfihu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

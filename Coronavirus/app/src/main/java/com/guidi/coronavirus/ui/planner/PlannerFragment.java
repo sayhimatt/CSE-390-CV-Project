@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.guidi.coronavirus.R;
 import com.guidi.coronavirus.dummy.DummyContent;
 import com.guidi.coronavirus.ui.achievements.AchievementsFragment;
+import com.guidi.coronavirus.DatabaseHelper.PlannerItemDatabaseHelper;
+import com.guidi.coronavirus.DatabaseHelper.PlannerItem;
 
 public class PlannerFragment extends Fragment {
 
@@ -68,6 +72,10 @@ public class PlannerFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new PlannerRecyclerViewAdapter(DummyContent.ITEMS));
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("FunkTasks");
+            DummyContent.DummyItem item = new DummyContent.DummyItem("4", "World", "Build");
+
+            mDatabase.push().setValue(item);
         }
         return view;
     }

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.guidi.coronavirus.R;
-import com.guidi.coronavirus.ui.fun.FunViewModel;
+//import com.guidi.coronavirus.ui.fun.FunViewModel;
 
 public class SettingsFragment extends Fragment {
 
