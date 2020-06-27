@@ -4,4 +4,8 @@
     <string name="title_fun">Fun</string>
     <string name="title_achievements">Achievements</string>
     <string name="filler_matt_s">Filler Text</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="signup_btn">Sign Up</string>
+    <string name= "login_btn">Log In</string>
 </resources>
