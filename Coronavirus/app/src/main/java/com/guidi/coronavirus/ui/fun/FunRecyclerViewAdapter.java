@@ -1,32 +1,34 @@
-package com.guidi.coronavirus;
-
-import androidx.recyclerview.widget.RecyclerView;
+package com.guidi.coronavirus.ui.fun;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.guidi.coronavirus.dummy.DummyContent.DummyItem;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.guidi.coronavirus.R;
+import com.guidi.coronavirus.dummy.DummyContent;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyTestingRecyclerViewAdapter extends RecyclerView.Adapter<MyTestingRecyclerViewAdapter.ViewHolder> {
+public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<DummyContent.DummyItem> mValues;
 
-    public MyTestingRecyclerViewAdapter(List<DummyItem> items) {
+    public FunRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
         mValues = items;
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.fragment_fun_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,16 +48,17 @@ public class MyTestingRecyclerViewAdapter extends RecyclerView.Adapter<MyTesting
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public DummyContent.DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = (TextView) view.findViewById(R.id.category_tv);
+            mContentView = (TextView) view.findViewById(R.id.plan_tv);
         }
 
         @Override
+        @NonNull
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
         }

@@ -13,15 +13,16 @@
 
     <fragment
         android:id="@+id/navigation_fun"
-        android:name="com.guidi.coronavirus.ui.achievements.AchievementsFragment"
+        android:name="com.guidi.coronavirus.ui.fun.FunFragment"
         android:label="@string/title_fun"
-        tools:layout="@layout/achievements_fragment" />
+        tools:layout="@layout/fun_fragment"/>
 
     <fragment
         android:id="@+id/navigation_achievements"
-        android:name="com.guidi.coronavirus.ui.fun.FunFragment"
+        android:name="com.guidi.coronavirus.ui.achievements.AchievementsFragment"
+
         android:label="@string/title_achievements"
-        tools:layout="@layout/fun_fragment" />
+        tools:layout="@layout/achievements_fragment"/>
     <fragment
         android:id="@+id/navigation_settings"
         android:label="Settings"
