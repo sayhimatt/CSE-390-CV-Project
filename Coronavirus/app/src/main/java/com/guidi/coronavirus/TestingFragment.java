@@ -1,27 +1,23 @@
-package com.guidi.coronavirus.ui.achievements;
+package com.guidi.coronavirus;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.guidi.coronavirus.AchievementsRecyclerViewAdapter;
-import com.guidi.coronavirus.MyTestingRecyclerViewAdapter;
-import com.guidi.coronavirus.R;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.guidi.coronavirus.dummy.DummyContent;
 
-public class AchievementsFragment extends Fragment {
+/**
+ * A fragment representing a list of Items.
+ */
+public class TestingFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -32,13 +28,13 @@ public class AchievementsFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AchievementsFragment() {
+    public TestingFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static com.guidi.coronavirus.TestingFragment newInstance(int columnCount) {
-        com.guidi.coronavirus.TestingFragment fragment = new com.guidi.coronavirus.TestingFragment();
+    public static TestingFragment newInstance(int columnCount) {
+        TestingFragment fragment = new TestingFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);

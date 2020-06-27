@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/navigation_settings"
         android:label="Settings"
-        android:name="com.guidi.coronavirus.ui.settings.Settings"
+        android:name="com.guidi.coronavirus.ui.settings.SettingsFragment"
         tools:layout="@layout/settings_fragment"/>
 </navigation>
