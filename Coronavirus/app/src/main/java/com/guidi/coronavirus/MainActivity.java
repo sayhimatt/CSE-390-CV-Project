@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -25,10 +26,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        String currentUserID = mAuth.getCurrentUser().getUid();
-        System.out.println(currentUserID);
-        if (currentUserID != null) {
-            // Have currentUserID here!
+        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                
+            }
+        });
+
+
+        try {
+            String currentUserID = mAuth.getCurrentUser().getUid();
             setContentView(R.layout.activity_main);
             // Creating Bottom Navigator View
             BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -40,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
-        }else{
+        }catch (Exception e){
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivityForResult(intent, SIGN_UP_ACTIVITY_CODE);
         }
