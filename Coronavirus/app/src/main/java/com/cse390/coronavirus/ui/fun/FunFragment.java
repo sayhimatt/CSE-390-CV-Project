@@ -29,7 +29,6 @@ public class FunFragment extends Fragment {
     }
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static FunFragment newInstance(int columnCount) {
         FunFragment fragment = new FunFragment();
         Bundle args = new Bundle();

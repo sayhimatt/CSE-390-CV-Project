@@ -7,22 +7,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cse390.coronavirus.MainActivity;
+import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.achievements.AchievementsFragment;
 
-public class PlannerFragment extends Fragment {
+import java.util.List;
+
+public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialogListener{
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private static RecyclerView planList;
+    private static List<DummyContent.DummyItem> mValues = DummyContent.ITEMS;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -32,9 +40,8 @@ public class PlannerFragment extends Fragment {
     }
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static AchievementsFragment newInstance(int columnCount) {
-        AchievementsFragment fragment = new AchievementsFragment();
+    public static PlannerFragment newInstance(int columnCount) {
+        PlannerFragment fragment = new PlannerFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -53,23 +60,48 @@ public class PlannerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_planner_list, container, false);
+        View view = inflater.inflate(R.layout.planner_fragment, container, false);
+
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (view.findViewById(R.id.planner_list) instanceof RecyclerView) {
+
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.planner_list);
+            planList = recyclerView;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new PlannerRecyclerViewAdapter(DummyContent.ITEMS));
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("FunkTasks");
-            DummyContent.DummyItem item = new DummyContent.DummyItem("4", "World", "Build");
+            recyclerView.setAdapter(new PlannerRecyclerViewAdapter(mValues));
 
-            mDatabase.push().setValue(item);
+
+            //DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("FunkTasks");
+            //DummyContent.DummyItem item = new DummyContent.DummyItem("4", "World", "Build");
+            //mDatabase.push().setValue(item);
+
+            FloatingActionButton addB = view.findViewById(R.id.add_planner_fab);
+            addB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Add stuff to the object here!
+                    FragmentManager fm = getFragmentManager();
+                    AddPlanDialog planDialog = new AddPlanDialog();
+                    planDialog.setTargetFragment(PlannerFragment.this, 300);
+                    planDialog.show(fm,"Add Plan Dialog");
+                    //DummyContent.removeTopItem(); Test for seeing dynamic changes
+
+
+                }
+            });
         }
         return view;
+    }
+
+    @Override
+    public void addPlanToList(DummyContent.DummyItem di) {
+        DummyContent.addItem(di);
+        planList.getAdapter().notifyDataSetChanged();
     }
 }

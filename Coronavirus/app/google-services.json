@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:268761451293:android:24fee7a67ff195eeb12ff4",
+        "mobilesdk_app_id": "1:268761451293:android:8be21770cf71ce3eb12ff4",
         "android_client_info": {
-          "package_name": "com.guidi.coronavirus"
+          "package_name": "com.cse390.coronavirus"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "268761451293-5j6sjqafrb02p0ntku3agdi7haatinp6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.guidi.coronavirus",
-            "certificate_hash": "dc8da00a12b214ee13757b1d780f43c8cd0c09d9"
-          }
-        },
         {
           "client_id": "268761451293-f9khrigqsrq0n0imrfughc6j14avfihu.apps.googleusercontent.com",
           "client_type": 3

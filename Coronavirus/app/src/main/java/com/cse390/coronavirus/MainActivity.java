@@ -3,6 +3,8 @@ package com.cse390.coronavirus;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.cse390.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener {
 
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
@@ -48,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivityForResult(intent, SIGN_UP_ACTIVITY_CODE);
         }
+    }
+
+    @Override
+    public void addPlanToList(DummyContent.DummyItem di) {
+            // Add the plan to the list
+
     }
 }

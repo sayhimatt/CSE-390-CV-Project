@@ -34,9 +34,12 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    public static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
+    }
+    public static void removeTopItem(){
+        ITEMS.remove(ITEMS.size()-1);
     }
 
     private static DummyItem createDummyItem(int position) {
