@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.settings;
+package com.cse390.coronavirus.ui.settings;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.guidi.coronavirus.R;
+import com.cse390.coronavirus.R;
 //import com.guidi.coronavirus.ui.fun.FunViewModel;
 
 public class SettingsFragment extends Fragment {

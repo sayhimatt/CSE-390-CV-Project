@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.DatabaseHelper;
+package com.cse390.coronavirus.DatabaseHelper;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

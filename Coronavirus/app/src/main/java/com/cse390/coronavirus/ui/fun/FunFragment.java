@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.achievements;
+package com.cse390.coronavirus.ui.fun;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.guidi.coronavirus.R;
-import com.guidi.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.R;
+import com.cse390.coronavirus.dummy.DummyContent;
 
-public class AchievementsFragment extends Fragment {
+public class FunFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -25,13 +25,13 @@ public class AchievementsFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AchievementsFragment() {
+    public FunFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static AchievementsFragment newInstance(int columnCount) {
-        AchievementsFragment fragment = new AchievementsFragment();
+    public static FunFragment newInstance(int columnCount) {
+        FunFragment fragment = new FunFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -50,7 +50,7 @@ public class AchievementsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_achievement_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_fun_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -61,7 +61,7 @@ public class AchievementsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new AchievementsRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new FunRecyclerViewAdapter(DummyContent.ITEMS));
         }
         return view;
     }

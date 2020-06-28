@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.DatabaseHelper;
+package com.cse390.coronavirus.DatabaseHelper;
 
 public class AchievementsItemDatabaseHelper {
 }

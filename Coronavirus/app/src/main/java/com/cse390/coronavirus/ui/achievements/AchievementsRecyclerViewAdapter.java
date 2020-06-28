@@ -1,26 +1,27 @@
-package com.guidi.coronavirus.ui.fun;
+package com.cse390.coronavirus.ui.achievements;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.guidi.coronavirus.R;
-import com.guidi.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.R;
+import com.cse390.coronavirus.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerViewAdapter.ViewHolder> {
+/**
+ * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * TODO: Replace the implementation with code for your data type.
+ */
+public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<AchievementsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyContent.DummyItem> mValues;
+    private final List<DummyItem> mValues;
 
-    public FunRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+    public AchievementsRecyclerViewAdapter(List<DummyItem> items) {
         mValues = items;
     }
 
@@ -28,7 +29,8 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_fun_item, parent, false);
+
+                .inflate(R.layout.fragment_achievement_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,7 +50,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyContent.DummyItem mItem;
+        public DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);

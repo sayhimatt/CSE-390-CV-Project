@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.planner;
+package com.cse390.coronavirus.ui.fun;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,21 +6,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.guidi.coronavirus.R;
-import com.guidi.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.R;
+import com.cse390.coronavirus.dummy.DummyContent;
 
 import java.util.List;
 
-public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecyclerViewAdapter.ViewHolder> {
+public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyContent.DummyItem> mValues;
 
-    public PlannerRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+    public FunRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
         mValues = items;
     }
 
@@ -28,7 +25,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_planner_item, parent, false);
+                .inflate(R.layout.fragment_fun_item, parent, false);
         return new ViewHolder(view);
     }
 

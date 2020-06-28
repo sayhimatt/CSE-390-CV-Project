@@ -1,4 +1,6 @@
-package com.guidi.coronavirus.dummy;
+package com.cse390.coronavirus.dummy;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +18,12 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<DummyItem> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<>();
 
     private static final int COUNT = 25;
 
@@ -65,6 +67,7 @@ public class DummyContent {
         }
 
         @Override
+        @NonNull
         public String toString() {
             return content;
         }

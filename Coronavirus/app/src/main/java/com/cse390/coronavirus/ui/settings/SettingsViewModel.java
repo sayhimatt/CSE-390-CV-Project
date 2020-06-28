@@ -1,4 +1,4 @@
-package com.guidi.coronavirus.ui.settings;
+package com.cse390.coronavirus.ui.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
