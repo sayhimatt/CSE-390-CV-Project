@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/planner"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.planner.PlannerFragment">
@@ -15,8 +16,8 @@
         android:focusable="true"
         android:src="@drawable/ic_baseline_add_24"
         app:backgroundTint="#00808E"
-        app:layout_constraintBottom_toTopOf="@+id/planner_list"
-        app:layout_constraintStart_toStartOf="@+id/planner_list"
+        app:layout_constraintBottom_toTopOf="@+id/planner"
+        app:layout_constraintStart_toStartOf="@+id/planner"
         app:layout_constraintTop_toTopOf="@+id/planner_list" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -29,7 +30,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_planner_fab"
-        tools:context=".MainActivity"
         tools:listitem="@layout/fragment_planner_item" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's Plans"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/planner_list"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintStart_toEndOf="@+id/add_planner_fab"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:backgroundTint="#00808E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

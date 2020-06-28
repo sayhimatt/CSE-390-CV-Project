@@ -7,19 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
+import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
+import com.cse390.coronavirus.ui.planner.PlannerFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class FunFragment extends Fragment {
+public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private static RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -49,12 +55,12 @@ public class FunFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fun_list, container, false);
+        View view = inflater.inflate(R.layout.fun_fragment, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (view.findViewById(R.id.fun_list) instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = view.findViewById(R.id.fun_list);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -62,6 +68,27 @@ public class FunFragment extends Fragment {
             }
             recyclerView.setAdapter(new FunRecyclerViewAdapter(DummyContent.ITEMS));
         }
+
+        FloatingActionButton addB = view.findViewById(R.id.add_fun_fab);
+        addB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Add stuff to the object here!
+                FragmentManager fm = getFragmentManager();
+                AddFunDialog funDialog = new AddFunDialog();
+                funDialog.setTargetFragment(FunFragment.this, 300);
+                funDialog.show(fm,"Add Fun Dialog");
+                //DummyContent.removeTopItem(); Test for seeing dynamic changes
+
+
+            }
+        });
+
         return view;
+    }
+    @Override
+    public void addFunToList(DummyContent.DummyItem di) {
+        DummyContent.addItem(di);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
