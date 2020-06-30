@@ -38,6 +38,13 @@ public class DummyContent {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
+
+    public static void removeItem(int index) {
+        DummyItem item = ITEMS.get(index);
+        ITEMS.remove(index);
+    }
+
+
     public static void removeTopItem(){
         ITEMS.remove(ITEMS.size()-1);
     }

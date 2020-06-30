@@ -9,4 +9,8 @@
     <string name="signup_btn">Sign Up</string>
     <string name= "login_btn">Log In</string>
     <string name="fun_activities_s">Fun Activities!</string>
+    <string name="fun_activity_name">Fun Activity Name</string>
+    <string name="fun_activity_category">Fun Activity Category</string>
+    <string name="add_fun_activity">Add Fun Activity</string>
+    <string name="description">Description</string>
 </resources>

@@ -15,6 +15,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
+
+import java.util.Date;
 
 public class AddPlanDialog extends DialogFragment{
 
@@ -45,9 +48,9 @@ public class AddPlanDialog extends DialogFragment{
                 String subject = planSubjectET.getText().toString();
                 String desc = planDescET.getText().toString();
 
-                DummyContent.DummyItem di = new DummyContent.DummyItem(subject,name,desc);
+                PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, subject, desc, false, new Date(), "1");
                 planDialogListener = (PlanDialogListener)getTargetFragment();
-                planDialogListener.addPlanToList(di);
+                planDialogListener.addPlanToList(pi);
             }
         });
 
@@ -65,6 +68,6 @@ public class AddPlanDialog extends DialogFragment{
         }
     }
     public interface PlanDialogListener{
-        void addPlanToList(DummyContent.DummyItem di);
+        void addPlanToList(PlannerContent.PlannerItem pi);
     }
 }

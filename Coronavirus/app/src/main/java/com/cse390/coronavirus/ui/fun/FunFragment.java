@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +58,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fun_fragment, container, false);
 
+
         // Set the adapter
         if (view.findViewById(R.id.fun_list) instanceof RecyclerView) {
             Context context = view.getContext();
@@ -67,22 +69,35 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new FunRecyclerViewAdapter(DummyContent.ITEMS));
+
+            FloatingActionButton addB = view.findViewById(R.id.add_fun_fab);
+            addB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Add stuff to the object here!
+                    FragmentManager fm = getFragmentManager();
+                    AddFunDialog funDialog = new AddFunDialog();
+                    funDialog.setTargetFragment(FunFragment.this, 300);
+                    funDialog.show(fm,"Add Fun Dialog");
+                    //DummyContent.removeTopItem(); Test for seeing dynamic changes
+                }
+            });
+
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                    ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                @Override
+                public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                    int index = viewHolder.getAdapterPosition();
+                    DummyContent.removeItem(index);
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
+            }).attachToRecyclerView(recyclerView);
         }
-
-        FloatingActionButton addB = view.findViewById(R.id.add_fun_fab);
-        addB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Add stuff to the object here!
-                FragmentManager fm = getFragmentManager();
-                AddFunDialog funDialog = new AddFunDialog();
-                funDialog.setTargetFragment(FunFragment.this, 300);
-                funDialog.show(fm,"Add Fun Dialog");
-                //DummyContent.removeTopItem(); Test for seeing dynamic changes
-
-
-            }
-        });
 
         return view;
     }
@@ -91,4 +106,6 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         DummyContent.addItem(di);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
+
+
 }

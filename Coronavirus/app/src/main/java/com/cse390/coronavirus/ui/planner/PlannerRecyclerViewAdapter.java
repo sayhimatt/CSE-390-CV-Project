@@ -8,16 +8,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.DatabaseHelper.PlannerContent.PlannerItem;
+
 
 import java.util.List;
 
 public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyContent.DummyItem> mValues;
+    private final List<PlannerContent.PlannerItem> mValues;
 
-    public PlannerRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+    public PlannerRecyclerViewAdapter(List<PlannerContent.PlannerItem> items) {
         mValues = items;
     }
 
@@ -32,8 +34,8 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(String.valueOf(position+1));
+        holder.mContentView.setText(mValues.get(position).getDescription());
     }
 
     @Override
@@ -45,7 +47,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyContent.DummyItem mItem;
+        public PlannerItem mItem;
 
         public ViewHolder(View view) {
             super(view);

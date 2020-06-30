@@ -25,7 +25,7 @@ public class AddFunDialog extends DialogFragment{
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_add_plan, null);
+        View view = inflater.inflate(R.layout.layout_add_fun, null);
 
         planNameET = view.findViewById(R.id.plan_et);
         planSubjectET = view.findViewById(R.id.plan_subject_et);

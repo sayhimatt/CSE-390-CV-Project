@@ -3,8 +3,12 @@ package com.cse390.coronavirus;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
 import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
+import com.cse390.coronavirus.ui.fun.FunFragment;
+import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -15,11 +19,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener {
-
+public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
 
 
         try {
-            String currentUserID = mAuth.getCurrentUser().getUid();
+            currentUserID = mAuth.getCurrentUser().getUid();
             setContentView(R.layout.activity_main);
             // Creating Bottom Navigator View
             BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
+            // Setting the user to the database
+
         }catch (Exception e){
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivityForResult(intent, SIGN_UP_ACTIVITY_CODE);
@@ -53,8 +62,16 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
     }
 
     @Override
-    public void addPlanToList(DummyContent.DummyItem di) {
+    public void addPlanToList(PlannerContent.PlannerItem di) {
             // Add the plan to the list
 
     }
+
+    @Override
+    public void addFunToList(DummyContent.DummyItem di) {
+            /// Add the fun to the list
+    }
+
+
+
 }
