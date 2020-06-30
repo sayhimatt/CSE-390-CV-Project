@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                
+                // Testing on New Machine Successful
             }
         });
 
