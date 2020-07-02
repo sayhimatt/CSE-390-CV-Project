@@ -1,6 +1,10 @@
 package com.cse390.coronavirus;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
@@ -14,7 +18,10 @@ import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -23,14 +30,20 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String currentUserID;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +55,6 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
                 // Testing on New Machine Successful
             }
         });
-
-
         try {
             currentUserID = mAuth.getCurrentUser().getUid();
             setContentView(R.layout.activity_main);
@@ -57,15 +68,23 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
-            // Setting the user to the database
-            navController.navigate(R.id.navigation_planner);
-
-
-
         }catch (Exception e){
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivityForResult(intent, SIGN_UP_ACTIVITY_CODE);
         }
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (currentUserID != null){
+            System.out.println("STOP");
+            generateNotification();
+        }
+
     }
 
     @Override
@@ -78,6 +97,55 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
     public void addFunToList(FunContent.FunItem fi) {
             /// Add the fun to the list
     }
+
+    private void createNotificationChannel(long myPlannerItemsTotal) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Khiem";
+            String description = "Myself";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("100", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            if (myPlannerItemsTotal > 0){
+                System.out.println(myPlannerItemsTotal);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "100")
+                        .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                        .setContentTitle("Items Due Today")
+                        .setContentText(String.valueOf(myPlannerItemsTotal))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                notificationManager.notify(100, builder.build());
+            }else{
+                notificationManager.cancel(100);
+            }
+        }
+    }
+
+    private void generateNotification(){
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
+        plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                long myPlannerItemsTotal = snapshot.getChildrenCount();
+
+                createNotificationChannel(myPlannerItemsTotal);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
+
 
 
 
