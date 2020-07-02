@@ -37,9 +37,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Path;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialogListener{
+public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialogListener {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -48,7 +49,7 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
     private static RecyclerView planList;
     private static List<PlannerContent.PlannerItem> mValues = PlannerContent.ITEMS;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
+
     private String currentUserID;
 
 
@@ -72,8 +73,10 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+
         }
 
     }
@@ -83,20 +86,23 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.planner_fragment, container, false);
         initAuth();
-        retrievePlannerItems();
+
 
         // Set the adapter
         if (view.findViewById(R.id.planner_list) instanceof RecyclerView) {
 
             Context context = view.getContext();
-            final RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.planner_list);
-            planList = recyclerView;
+            planList = (RecyclerView) view.findViewById(R.id.planner_list);
+
+            retrievePlannerItems();
+
             if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                planList.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                planList.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new PlannerRecyclerViewAdapter(mValues));
+
+            planList.setAdapter(new PlannerRecyclerViewAdapter(mValues));
 
             FloatingActionButton addB = view.findViewById(R.id.add_planner_fab);
             addB.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +112,7 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
                 }
             });
             initDelete();
+
         }
         return view;
     }
@@ -113,7 +120,7 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
     @Override
     public void addPlanToList(PlannerContent.PlannerItem pi) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("PlannerItems");
-        String id =  ref.push().getKey();
+        String id = ref.push().getKey();
         pi.setId(id);
         ref.child(id).setValue(pi);
         PlannerContent.addItem(pi);
@@ -121,7 +128,7 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
 
     }
 
-    private void initAuth(){
+    private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
@@ -132,12 +139,12 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
         try {
             currentUserID = mAuth.getCurrentUser().getUid();
 
-        }catch (Exception e){
-            // Load Dummy Data Here
+        } catch (Exception e) {
+
         }
     }
 
-    private void initDelete(){
+    private void initDelete() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -160,27 +167,28 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
         }).attachToRecyclerView(planList);
     }
 
-    private void initDialogFab(){
+    private void initDialogFab() {
         // Add stuff to the object here!
         FragmentManager fm = getFragmentManager();
         AddPlanDialog planDialog = new AddPlanDialog();
         planDialog.setTargetFragment(PlannerFragment.this, 300);
-        planDialog.show(fm,"Add Plan Dialog");
-        //DummyContent.removeTopItem(); Test for seeing dynamic changes
+        planDialog.show(fm, "Add Plan Dialog");
+
     }
 
-    private void retrievePlannerItems(){
+    private void retrievePlannerItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
-
+        DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
         plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot singleSnapShot : snapshot.getChildren()){
+                for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
                     PlannerContent.PlannerItem item = singleSnapShot.getValue(PlannerContent.PlannerItem.class);
-                    PlannerContent.addItem(item);
-                    planList.getAdapter().notifyDataSetChanged();
+                    if(!PlannerContent.ITEMS.contains(item)){
+                        PlannerContent.addItem(item);
+                    }
                 }
+                planList.getAdapter().notifyDataSetChanged();
             }
 
             @Override

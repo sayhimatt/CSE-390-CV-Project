@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cse390.coronavirus.DatabaseHelper.FunContent;
+import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
@@ -21,6 +23,8 @@ import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
 import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener {
 
     // TODO: Customize parameter argument names
@@ -28,6 +32,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private static RecyclerView recyclerView;
+    private static List<FunContent.FunItem> mValues = FunContent.ITEMS;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,7 +74,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new FunRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new FunRecyclerViewAdapter(mValues));
 
             FloatingActionButton addB = view.findViewById(R.id.add_fun_fab);
             addB.setOnClickListener(new View.OnClickListener() {

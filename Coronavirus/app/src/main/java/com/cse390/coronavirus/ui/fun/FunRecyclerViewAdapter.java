@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 
@@ -15,9 +16,9 @@ import java.util.List;
 
 public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyContent.DummyItem> mValues;
+    private final List<FunContent.FunItem> mValues;
 
-    public FunRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+    public FunRecyclerViewAdapter(List<FunContent.FunItem> items) {
         mValues = items;
     }
 
@@ -32,8 +33,8 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(String.valueOf(position+1));
+        holder.mContentView.setText(mValues.get(position).getDescription());
     }
 
     @Override
@@ -45,7 +46,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyContent.DummyItem mItem;
+        public FunContent.FunItem mItem;
 
         public ViewHolder(View view) {
             super(view);

@@ -1,13 +1,12 @@
 package com.cse390.coronavirus.DatabaseHelper;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.time.LocalDateTime;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -20,12 +19,16 @@ public class PlannerContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<PlannerItem> ITEMS = new ArrayList<>();
+    public static List<PlannerItem> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, PlannerItem> ITEM_MAP = new HashMap<>();
+
+    public static void setItems(List<PlannerItem> items){
+        ITEMS = items;
+    }
 
     public static void addItem(PlannerItem item) {
         ITEMS.add(item);
@@ -42,16 +45,6 @@ public class PlannerContent {
         return  item;
     }
 
-
-    public static void removeTopItem(){
-        ITEMS.remove(ITEMS.size()-1);
-    }
-
-    private static PlannerItem createPlannerItem(int position) {
-
-        return new PlannerItem("Emtpy Category", "CSE 101" , "No Description", false, new Date(), String.valueOf(position));
-    }
-
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
@@ -61,9 +54,6 @@ public class PlannerContent {
         return builder.toString();
     }
 
-    /**
-     * A dummy item representing a piece of content.
-     */
     public static class PlannerItem {
         private String category;
         private String subject;
@@ -122,6 +112,29 @@ public class PlannerContent {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+
+
+            final PlannerContent.PlannerItem other = (PlannerContent.PlannerItem) obj;
+            if (this.category.equals(other.category) && this.subject.equals(other.subject) && this.description.equals(other.description)
+                    && this.completed == other.completed && this.dueDate.equals(other.dueDate) && this.id.equals(other.id)
+            ){
+                return true;
+            }else{
+                return false;
+            }
+
         }
     }
 }

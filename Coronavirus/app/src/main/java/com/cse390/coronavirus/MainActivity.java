@@ -7,13 +7,16 @@ import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
 import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
+import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
 import com.cse390.coronavirus.ui.fun.FunFragment;
 import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
             // Setting the user to the database
+            navController.navigate(R.id.navigation_planner);
+
+
 
         }catch (Exception e){
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);

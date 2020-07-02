@@ -28,12 +28,6 @@ public class FunContent {
 
     private static final int COUNT = 25;
 
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createFunItem(i));
-        }
-    }
 
     public static void addItem(FunItem item) {
         ITEMS.add(item);
@@ -45,15 +39,6 @@ public class FunContent {
         ITEMS.remove(index);
     }
 
-
-    public static void removeTopItem(){
-        ITEMS.remove(ITEMS.size()-1);
-    }
-
-    private static FunItem createFunItem(int position) {
-
-        return new FunItem("Emtpy Category", "No Description", false, new Date(), position);
-    }
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
@@ -73,9 +58,6 @@ public class FunContent {
         private boolean completed;
         private Date dueDate;
         private int id;
-
-
-
 
         public FunItem(String category, String description, boolean completed, Date dueDate, int id){
             this.category = category;

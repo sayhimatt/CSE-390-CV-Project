@@ -44,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signup_btn);
         emailEditText = findViewById(R.id.email_edt_text);
         passwordEditText = findViewById(R.id.pass_edt_text);
+        loginButton = findViewById(R.id.login_btn);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,39 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                    Toast.makeText(SignUpActivity.this, "Please Fill In The Empty Fields", Toast.LENGTH_LONG).show();
+                }else{
+                    System.out.println(email);
+                    System.out.println(password);
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(SignUpActivity.this, "Successfully Signed-In", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                String currentUserID = mAuth.getCurrentUser().getUid();
+                                intent.putExtra("userID", currentUserID);
+                                setResult(RESULT_OK, intent);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Toast.makeText(SignUpActivity.this, "Sign-In Failed", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
 
