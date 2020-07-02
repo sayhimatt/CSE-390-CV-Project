@@ -49,7 +49,6 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
     private static RecyclerView planList;
     private static List<PlannerContent.PlannerItem> mValues = PlannerContent.ITEMS;
     private FirebaseAuth mAuth;
-
     private String currentUserID;
 
 

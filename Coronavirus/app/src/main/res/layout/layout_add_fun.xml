@@ -23,7 +23,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
-            android:id="@+id/plan_subject_et"
+            android:id="@+id/fun_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -36,7 +36,7 @@
             android:textColor="#A1A1A1" />
 
         <EditText
-            android:id="@+id/plan_et"
+            android:id="@+id/fun_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -48,7 +48,7 @@
             android:textColor="#A1A1A1" />
 
         <EditText
-            android:id="@+id/description_et"
+            android:id="@+id/fun_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

@@ -13,11 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 
 public class AddFunDialog extends DialogFragment{
-    private EditText planNameET, planSubjectET, planDescET;
+    private EditText funCategory, funName, funDescription;
     private FunDialogListener funDialogListener;
     @NonNull
     @Override
@@ -27,9 +28,9 @@ public class AddFunDialog extends DialogFragment{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_add_fun, null);
 
-        planNameET = view.findViewById(R.id.plan_et);
-        planSubjectET = view.findViewById(R.id.plan_subject_et);
-        planDescET = view.findViewById(R.id.description_et);
+        funCategory = view.findViewById(R.id.fun_category);
+        funName = view.findViewById(R.id.fun_name);
+        funDescription = view.findViewById(R.id.fun_description);
 
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -40,13 +41,12 @@ public class AddFunDialog extends DialogFragment{
         builder.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String name = planNameET.getText().toString();
-                String subject = planSubjectET.getText().toString();
-                String desc = planDescET.getText().toString();
-
-                DummyContent.DummyItem di = new DummyContent.DummyItem(subject,name,desc);
+                String category = funCategory.getText().toString();
+                String name = funName.getText().toString();
+                String description = funDescription.getText().toString();
+                FunContent.FunItem fi = new FunContent.FunItem(category, name, description, false, "1");
                 funDialogListener = (FunDialogListener)getTargetFragment();
-                funDialogListener.addFunToList(di);
+                funDialogListener.addFunToList(fi);
             }
         });
         return builder.create();
@@ -61,7 +61,7 @@ public class AddFunDialog extends DialogFragment{
         }
     }
     public interface FunDialogListener{
-        void addFunToList(DummyContent.DummyItem di);
+        void addFunToList(FunContent.FunItem fi);
     }
 }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,6 +23,12 @@ import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
 import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
 import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -33,6 +40,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     private int mColumnCount = 1;
     private static RecyclerView recyclerView;
     private static List<FunContent.FunItem> mValues = FunContent.ITEMS;
+    private FirebaseAuth mAuth;
+    private String currentUserID;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -63,10 +73,13 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fun_fragment, container, false);
-
+        initAuth();
 
         // Set the adapter
         if (view.findViewById(R.id.fun_list) instanceof RecyclerView) {
+
+            retrieveFunItems();
+
             Context context = view.getContext();
             recyclerView = view.findViewById(R.id.fun_list);
             if (mColumnCount <= 1) {
@@ -100,29 +113,80 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                 }
             });
 
+            initDelete();
 
-            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                    ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-                @Override
-                public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                    return false;
-                }
-
-                @Override
-                public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                    int index = viewHolder.getAdapterPosition();
-                    DummyContent.removeItem(index);
-                    recyclerView.getAdapter().notifyDataSetChanged();
-                }
-            }).attachToRecyclerView(recyclerView);
         }
 
         return view;
     }
+
+    private void initAuth() {
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        });
+        try {
+            currentUserID = mAuth.getCurrentUser().getUid();
+
+        } catch (Exception e) {
+
+        }
+    }
+
     @Override
-    public void addFunToList(DummyContent.DummyItem di) {
-        DummyContent.addItem(di);
+    public void addFunToList(FunContent.FunItem fi) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");
+        String id = ref.push().getKey();
+        fi.setId(id);
+        ref.child(id).setValue(fi);
+        FunContent.addItem(fi);
         recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    private void initDelete(){
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int index = viewHolder.getAdapterPosition();
+                FunContent.FunItem item = FunContent.getItem(index);
+                String id = item.getId(); // ID to Delete From Firebase
+                FunContent.removeItem(index);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems").child(id);
+                ref.removeValue();
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+        }).attachToRecyclerView(recyclerView);
+    }
+
+    private void retrieveFunItems() {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("FunItems");
+        plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
+                    FunContent.FunItem item = singleSnapShot.getValue(FunContent.FunItem.class);
+                    if(!FunContent.ITEMS.contains(item)){
+                        FunContent.addItem(item);
+                    }
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

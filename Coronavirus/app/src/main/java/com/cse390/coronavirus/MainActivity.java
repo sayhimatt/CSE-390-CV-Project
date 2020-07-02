@@ -3,6 +3,7 @@ package com.cse390.coronavirus;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
     }
 
     @Override
-    public void addFunToList(DummyContent.DummyItem di) {
+    public void addFunToList(FunContent.FunItem fi) {
             /// Add the fun to the list
     }
 

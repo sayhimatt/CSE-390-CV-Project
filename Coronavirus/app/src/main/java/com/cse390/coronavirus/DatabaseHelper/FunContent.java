@@ -1,6 +1,8 @@
 package com.cse390.coronavirus.DatabaseHelper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,10 +26,7 @@ public class FunContent {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<Integer, FunItem> ITEM_MAP = new HashMap<>();
-
-    private static final int COUNT = 25;
-
+    public static final Map<String, FunItem> ITEM_MAP = new HashMap<>();
 
     public static void addItem(FunItem item) {
         ITEMS.add(item);
@@ -37,6 +36,11 @@ public class FunContent {
     public static void removeItem(int index) {
         FunItem item = ITEMS.get(index);
         ITEMS.remove(index);
+    }
+
+    public static FunContent.FunItem getItem(int index){
+        FunContent.FunItem item = ITEMS.get(index);
+        return item;
     }
 
 
@@ -54,16 +58,19 @@ public class FunContent {
      */
     public static class FunItem {
         private String category;
+        public String name;
         private String description;
         private boolean completed;
-        private Date dueDate;
-        private int id;
+        private String id;
 
-        public FunItem(String category, String description, boolean completed, Date dueDate, int id){
+        public FunItem(){}
+
+        public FunItem(String category, String description, String name, boolean completed, String id){
             this.category = category;
+            this.name = name;
             this.description = description;
             this.completed = completed;
-            this.dueDate = dueDate;
+
             this.id = id;
         }
 
@@ -91,20 +98,32 @@ public class FunContent {
             this.completed = completed;
         }
 
-        public void setDueDate(Date dueDate) {
-            this.dueDate = dueDate;
-        }
-
-        public Date getDueDate() {
-            return dueDate;
-        }
-
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            final FunContent.FunItem other = (FunContent.FunItem) obj;
+            if (this.category.equals(other.category) && this.name.equals(other.name) && this.description.equals(other.description)
+                    && this.completed == other.completed && this.id.equals(other.id)
+            ){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }
