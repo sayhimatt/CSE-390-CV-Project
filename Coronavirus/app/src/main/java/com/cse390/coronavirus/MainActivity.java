@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
@@ -36,6 +37,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
@@ -119,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                 notificationManager.notify(100, builder.build());
             }else{
-                notificationManager.cancel(100);
+                notificationManager.cancel(100); // dismiss the notification , no tasks are due
             }
         }
     }
@@ -131,7 +136,16 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                long myPlannerItemsTotal = snapshot.getChildrenCount();
+                long myPlannerItemsTotal = 0;
+                for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
+                    PlannerContent.PlannerItem item = singleSnapShot.getValue(PlannerContent.PlannerItem.class);
+                    Date today = new Date();
+                    Date itemDate = item.getDueDate();
+                    SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+                    if (fmt.format(today).equals(fmt.format(itemDate))){
+                        myPlannerItemsTotal++;
+                    }
+                }
 
                 createNotificationChannel(myPlannerItemsTotal);
             }
@@ -142,11 +156,5 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             }
         });
     }
-
-
-
-
-
-
 
 }
