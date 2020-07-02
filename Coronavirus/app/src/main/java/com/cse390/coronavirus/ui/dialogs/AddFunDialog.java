@@ -57,7 +57,7 @@ public class AddFunDialog extends DialogFragment{
         try {
             funDialogListener = (FunDialogListener) c;
         } catch (ClassCastException e) {
-            throw new ClassCastException(getContext().toString() + " does not implement PlanDialogListener");
+            throw new ClassCastException(getContext().toString() + " does not implement FunDialogListener");
         }
     }
     public interface FunDialogListener{

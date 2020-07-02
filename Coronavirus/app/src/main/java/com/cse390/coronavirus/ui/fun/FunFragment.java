@@ -17,6 +17,7 @@ import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
 import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
+import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
 import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -82,6 +83,18 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                     //DummyContent.removeTopItem(); Test for seeing dynamic changes
                 }
             });
+
+            FloatingActionButton generateB = view.findViewById(R.id.generate_fun_fab);
+            generateB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fm = getFragmentManager();
+                    GenerateFunDialog genDialog = new GenerateFunDialog();
+                    genDialog.setTargetFragment(FunFragment.this, 300);
+                    genDialog.show(fm,"Generate Fun Dialog");
+                }
+            });
+
 
             new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                     ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
