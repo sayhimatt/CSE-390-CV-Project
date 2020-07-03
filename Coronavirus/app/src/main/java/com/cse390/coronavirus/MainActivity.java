@@ -2,6 +2,8 @@ package com.cse390.coronavirus;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -116,12 +118,20 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
             if (myPlannerItemsTotal > 0){
-                System.out.println(myPlannerItemsTotal);
+                Intent returnToPlannerIntent = new Intent(this, MainActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+                stackBuilder.addParentStack(MainActivity.class);
+                stackBuilder.addNextIntent(returnToPlannerIntent);
+                PendingIntent returnToPlannerPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "100")
-                        .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                        .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark) //TODO: Change Icon Here
                         .setContentTitle("Items Due Today")
-                        .setContentText(String.valueOf(myPlannerItemsTotal))
+                        .setContentText(String.valueOf(myPlannerItemsTotal) + " Item(s) Due Today!")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                builder.setContentIntent(returnToPlannerPendingIntent);
+
                 notificationManager.notify(100, builder.build());
             }else{
                 notificationManager.cancel(100); // dismiss the notification , no tasks are due
