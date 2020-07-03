@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:menuCategory="container"
+        android:title="@string/account"
+        android:visible="true"
+        app:showAsAction="always">
+        <menu android:id="@+id/account_opts">
+            <item
+                android:id="@+id/sign_out_mi"
+                android:tag="signout_b"
+                android:title="@string/sign_out" />
+        </menu>
+    </item>
+</menu>

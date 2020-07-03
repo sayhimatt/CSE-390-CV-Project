@@ -8,6 +8,9 @@ import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
@@ -187,5 +190,20 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.sign_out_mi) {
+            Toast.makeText(this, "You touched sign out!", Toast.LENGTH_SHORT).show();
+        }
+        // Do something when log out is selected
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }
