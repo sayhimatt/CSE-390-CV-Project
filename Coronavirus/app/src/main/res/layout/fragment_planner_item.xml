@@ -22,11 +22,20 @@
         android:text="@string/filler_matt_s"
         android:textAppearance="?attr/textAppearanceListItem" />
 
-    <Button
-        android:id="@+id/completed_b"
-        style="@style/Widget.AppCompat.Button.Small"
+    <TextView
+        android:id="@+id/date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/filler_matt_s" />
+        android:layout_weight="1"
+        android:text="@string/filler_matt_s"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <CheckBox
+        android:id="@+id/completed_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:text="@string/completed_s" />
 
 </LinearLayout>

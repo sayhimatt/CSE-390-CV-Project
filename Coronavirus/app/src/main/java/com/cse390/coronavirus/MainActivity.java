@@ -1,5 +1,6 @@
 package com.cse390.coronavirus;
 
+import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
@@ -40,7 +42,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
+public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener, DatePickerDialog.OnDateSetListener {
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
@@ -205,5 +207,10 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
     }
 }

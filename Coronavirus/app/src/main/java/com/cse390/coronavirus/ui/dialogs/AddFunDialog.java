@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,18 @@ public class AddFunDialog extends DialogFragment{
         funCategory = view.findViewById(R.id.fun_category);
         funName = view.findViewById(R.id.fun_name);
         funDescription = view.findViewById(R.id.fun_description);
+
+
+        Button dateB = view.findViewById(R.id.date_pickf_b);
+        dateB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePicker();
+                datePicker.show(getChildFragmentManager(), "Date Picker");
+            }
+        });
+
+
 
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

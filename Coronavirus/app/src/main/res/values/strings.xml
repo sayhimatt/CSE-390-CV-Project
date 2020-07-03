@@ -16,4 +16,6 @@
     <string name="today_s_plans">Today\'s Plans</string>
     <string name="sign_out">Sign out</string>
     <string name="account">Account</string>
+    <string name="completed_s">Completed</string>
+    <string name="choose_date_s">Choose Date</string>
 </resources>
