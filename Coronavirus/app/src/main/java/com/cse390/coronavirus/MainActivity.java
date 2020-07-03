@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Khiem";
             String description = "Myself";
+
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("channel01", name, importance);
             channel.setDescription(description);

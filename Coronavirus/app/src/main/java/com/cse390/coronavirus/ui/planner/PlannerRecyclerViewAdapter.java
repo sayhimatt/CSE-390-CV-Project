@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +37,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(String.valueOf(position+1));
         holder.mContentView.setText(mValues.get(position).getDescription());
+
     }
 
     @Override
@@ -54,6 +56,12 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.category_tv);
             mContentView = (TextView) view.findViewById(R.id.plan_tv);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "Dubber", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
