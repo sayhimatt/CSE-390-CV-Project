@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.cse390.coronavirus.SignUpActivity" ></activity>
-
+        <receiver android:name=".ReminderBroadcast"/>
     </application>
 
 </manifest>

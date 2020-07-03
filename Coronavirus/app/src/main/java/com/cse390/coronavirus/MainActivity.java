@@ -1,5 +1,7 @@
 package com.cse390.coronavirus;
 
+import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -44,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+
 public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
@@ -75,6 +78,20 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
+            /*
+            createHourlyNotification();
+            Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
+            PendingIntent pendingHourlyNotify = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+            AlarmManager alarmManager =  (AlarmManager) getSystemService(ALARM_SERVICE);
+
+            long time = System.currentTimeMillis();
+
+            long tenSeconds = 1000 * 10 ;
+
+            alarmManager.set(AlarmManager.RTC_WAKEUP, time + tenSeconds, pendingHourlyNotify);
+            
+             */
+
         }catch (Exception e){
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivityForResult(intent, SIGN_UP_ACTIVITY_CODE);
@@ -111,12 +128,13 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Khiem";
             String description = "Myself";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("100", name, importance);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("channel01", name, importance);
             channel.setDescription(description);
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+
             if (myPlannerItemsTotal > 0){
                 Intent returnToPlannerIntent = new Intent(this, MainActivity.class);
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -124,13 +142,14 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
                 stackBuilder.addNextIntent(returnToPlannerIntent);
                 PendingIntent returnToPlannerPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "100")
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel01")
                         .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark) //TODO: Change Icon Here
                         .setContentTitle("Items Due Today")
-                        .setContentText(String.valueOf(myPlannerItemsTotal) + " Item(s) Due Today!")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        .setContentText("You Have " + String.valueOf(myPlannerItemsTotal) + " Item(s) Due Today!")
+                        .setDefaults(Notification.DEFAULT_ALL).setPriority(NotificationCompat.PRIORITY_HIGH);
+
                 builder.setContentIntent(returnToPlannerPendingIntent);
+
 
                 notificationManager.notify(100, builder.build());
             }else{
@@ -165,6 +184,16 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
 
             }
         });
+    }
+
+    private void createHourlyNotification(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "TimeReminder";
+            String description = "Reminder Every 4 Hours For Tasks";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Hourly Notification", name, importance);
+            channel.setDescription(description);
+        }
     }
 
 }
