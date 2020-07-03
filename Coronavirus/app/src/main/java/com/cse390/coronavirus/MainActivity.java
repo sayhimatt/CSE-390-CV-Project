@@ -1,41 +1,31 @@
 package com.cse390.coronavirus;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
-import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
-import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
-import com.cse390.coronavirus.ui.fun.FunFragment;
-import com.cse390.coronavirus.ui.planner.PlannerFragment;
+import com.cse390.coronavirus.ui.dialogs.PlanDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,10 +34,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
-
-public class MainActivity extends AppCompatActivity implements AddPlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
+public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener{
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
@@ -196,5 +186,6 @@ public class MainActivity extends AppCompatActivity implements AddPlanDialog.Pla
             channel.setDescription(description);
         }
     }
+
 
 }

@@ -1,31 +1,21 @@
 package com.cse390.coronavirus.ui.planner;
 
-import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
-import com.cse390.coronavirus.MainActivity;
-import com.cse390.coronavirus.SignUpActivity;
-import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.cse390.coronavirus.ui.dialogs.PlanDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,16 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
-import com.cse390.coronavirus.ui.achievements.AchievementsFragment;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Path;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialogListener {
+public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogListener {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -105,7 +90,7 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
 
 
 
-            planList.setAdapter(new PlannerRecyclerViewAdapter(mValues));
+            planList.setAdapter(new PlannerRecyclerViewAdapter(mValues,getContext()));
 
             FloatingActionButton addB = view.findViewById(R.id.add_planner_fab);
             addB.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +105,6 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
         return view;
     }
 
-    @Override
     public void addPlanToList(PlannerContent.PlannerItem pi) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("PlannerItems");
         String id = ref.push().getKey();
@@ -173,7 +157,7 @@ public class PlannerFragment extends Fragment implements AddPlanDialog.PlanDialo
     private void initDialogFab() {
         // Add stuff to the object here!
         FragmentManager fm = getFragmentManager();
-        AddPlanDialog planDialog = new AddPlanDialog();
+        PlanDialog planDialog = new PlanDialog();
         planDialog.setTargetFragment(PlannerFragment.this, 300);
         planDialog.show(fm, "Add Plan Dialog");
 

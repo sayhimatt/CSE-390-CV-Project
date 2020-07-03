@@ -15,13 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
-import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
-import com.cse390.coronavirus.ui.dialogs.AddPlanDialog;
 import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
-import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

@@ -11,12 +11,13 @@
         android:id="@+id/add_fun_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toTopOf="@+id/fun_list"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/fun_list" />
 
     <TextView
         android:id="@+id/fun_tv"
@@ -24,20 +25,23 @@
         android:layout_height="wrap_content"
         android:text="@string/fun_activities_s"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintStart_toEndOf="@id/add_fun_fab"
-        app:layout_constraintEnd_toStartOf="@id/generate_fun_fab"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent
+"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="143dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/generate_fun_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_baseline_sync_24"
-        app:layout_constraintBottom_toTopOf="@+id/fun_list"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/fun_list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fun_list"
@@ -45,10 +49,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/add_fun_fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/generate_fun_fab"
+        app:layout_constraintTop_toBottomOf="@id/fun_tv"
         tools:listitem="@layout/fragment_fun_item" />
 
 
