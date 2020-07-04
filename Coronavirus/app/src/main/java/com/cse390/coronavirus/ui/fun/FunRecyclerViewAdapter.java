@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.category_tv);
-            mContentView = (TextView) view.findViewById(R.id.plan_tv);
+            mContentView = (TextView) view.findViewById(R.id.subject_tv);
         }
 
         @Override

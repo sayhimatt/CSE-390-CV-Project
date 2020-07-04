@@ -56,7 +56,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.category_tv);
-            mContentView = (TextView) view.findViewById(R.id.plan_tv);
+            mContentView = (TextView) view.findViewById(R.id.subject_tv);
         }
 
         @Override
