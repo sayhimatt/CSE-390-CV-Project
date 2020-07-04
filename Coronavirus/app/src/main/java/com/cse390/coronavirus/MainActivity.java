@@ -11,6 +11,7 @@ import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
 import com.cse390.coronavirus.ui.dialogs.PlanDialog;
+import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +21,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener, DatePickerDialog.OnDateSetListener {
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
     private String currentUserID;
+    private Date dateSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
 
     @Override
     protected void onDestroy() {
-        super.onStop();
+        super.onDestroy();
 
         if (currentUserID != null){
             startService( new Intent( this, NotificationService. class )) ;
@@ -103,7 +110,21 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String input = String.valueOf(dayOfMonth) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+        try {
+            Date inputDate = format.parse(input);
+            setDateSet(inputDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
+    public Date getDateSet() {
+        return dateSet;
+    }
 
+    public void setDateSet(Date dateSet) {
+        this.dateSet = dateSet;
+    }
 }

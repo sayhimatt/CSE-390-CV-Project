@@ -1,6 +1,7 @@
 package com.cse390.coronavirus.ui.dialogs;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,7 +24,7 @@ import com.cse390.coronavirus.ui.planner.PlannerFragment;
 
 import java.util.Date;
 
-public class PlanDialog extends DialogFragment{
+public class PlanDialog extends DialogFragment {
     private String name, subject;
     private EditText planNameET, planSubjectET, planDescET;
     private PlanDialogListener planDialogListener;
@@ -42,12 +43,14 @@ public class PlanDialog extends DialogFragment{
         planDescET = view.findViewById(R.id.description_et);
 
 
+
         Button dateB = view.findViewById(R.id.date_pick_b);
         dateB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePicker();
                 datePicker.show(getChildFragmentManager(), "Date Picker");
+
             }
         });
 
@@ -66,8 +69,10 @@ public class PlanDialog extends DialogFragment{
                 String name = planNameET.getText().toString();
                 String subject = planSubjectET.getText().toString();
                 String desc = planDescET.getText().toString();
+                MainActivity activity = (MainActivity) getActivity();
+                Date userDate = activity.getDateSet();
 
-                PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, subject, desc, false, new Date(), "1");
+                PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, subject, desc, false, userDate, "1");
 
                 if(isDetails){
                     PlannerContent.editItem(pos, pi);
@@ -103,6 +108,9 @@ public class PlanDialog extends DialogFragment{
             throw new ClassCastException(getContext().toString() + " does not implement PlanDialogListener");
         }
     }
+
+
+
     public interface PlanDialogListener{
         void addPlanToList(PlannerContent.PlannerItem pi);
     }

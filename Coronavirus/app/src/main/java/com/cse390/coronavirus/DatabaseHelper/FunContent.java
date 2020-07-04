@@ -63,6 +63,7 @@ public class FunContent {
         private boolean completed;
         private String id;
 
+
         public FunItem(){}
 
         public FunItem(String category, String description, String name, boolean completed, String id){

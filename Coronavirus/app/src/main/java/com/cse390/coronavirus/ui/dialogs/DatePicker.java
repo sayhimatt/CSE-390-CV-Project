@@ -18,9 +18,12 @@ public class DatePicker extends DialogFragment {
         Calendar c = Calendar.getInstance();
         return new DatePickerDialog(getActivity(),
                 (DatePickerDialog.OnDateSetListener)getActivity(),
+
                 c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH),
                 c.get(Calendar.DAY_OF_MONTH)
         );
     }
+
+
 }
