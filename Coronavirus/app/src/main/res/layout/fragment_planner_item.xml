@@ -13,10 +13,11 @@
         <TextView
             android:id="@+id/category_tv"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:ellipsize="end"
             android:maxLines="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+
             android:text="@string/filler_matt_s"
             android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />

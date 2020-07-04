@@ -21,6 +21,8 @@ import com.cse390.coronavirus.dummy.DummyContent;
 public class AddFunDialog extends DialogFragment{
     private EditText funCategory, funName, funDescription;
     private FunDialogListener funDialogListener;
+    private boolean isDetails = false;
+    private String category, name, desc;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class AddFunDialog extends DialogFragment{
         funName = view.findViewById(R.id.fun_name);
         funDescription = view.findViewById(R.id.fun_description);
 
-
+        /*
         Button dateB = view.findViewById(R.id.date_pickf_b);
         dateB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +44,7 @@ public class AddFunDialog extends DialogFragment{
                 datePicker.show(getChildFragmentManager(), "Date Picker");
             }
         });
-
+        */
 
 
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -62,8 +64,21 @@ public class AddFunDialog extends DialogFragment{
                 funDialogListener.addFunToList(fi);
             }
         });
+        if(isDetails){
+            funCategory.setText(category);
+            funName.setText(name);
+            funDescription.setText(desc);
+        }
         return builder.create();
     }
+
+    public void setDetails(int pos, String category, String name, String desc) {
+        isDetails = true;
+        this.category = category;
+        this.name = name;
+        this.desc = desc;
+    }
+
     @Override
     public void onAttach(Context c){
         super.onAttach(c);

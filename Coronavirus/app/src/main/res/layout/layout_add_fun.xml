@@ -68,14 +68,16 @@
             android:layout_marginBottom="20dp"
             android:text="Date: "
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/date_pickf_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/choose_date_s" />
+            android:text="@string/choose_date_s"
+            android:visibility="gone" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -83,7 +83,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new FunRecyclerViewAdapter(mValues));
+            recyclerView.setAdapter(new FunRecyclerViewAdapter(mValues, getContext()));
 
             FloatingActionButton addB = view.findViewById(R.id.add_fun_fab);
             addB.setOnClickListener(new View.OnClickListener() {
