@@ -51,7 +51,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.category_tv);
-            mContentView = (TextView) view.findViewById(R.id.subject_tv);
+            mContentView = (TextView) view.findViewById(R.id.name_tv);
         }
 
         @Override

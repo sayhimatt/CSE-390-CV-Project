@@ -19,7 +19,6 @@ import com.cse390.coronavirus.ui.dialogs.PlanDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecyclerViewAdapter.ViewHolder> {
@@ -87,7 +86,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             super(view);
             mView = view;
             categoryView = view.findViewById(R.id.category_tv);
-            subjectView =  view.findViewById(R.id.subject_tv);
+            subjectView =  view.findViewById(R.id.name_tv);
             descriptionView = view.findViewById(R.id.desc_tv);
             dateView = view.findViewById(R.id.due_date_tv);
             completedCheckB = view.findViewById(R.id.completed_cb);

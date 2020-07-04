@@ -12,26 +12,35 @@
 
         <TextView
             android:id="@+id/category_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/filler_matt_s"
+            android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/subject_tv"
-            android:layout_width="wrap_content"
+            android:id="@+id/name_tv"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/filler_matt_s"
+            android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+id/due_date_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/filler_matt_s"
+            android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <CheckBox
@@ -51,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/text_margin"
+        android:singleLine="true"
         android:text="@string/filler_matt_s"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceListItem" />
