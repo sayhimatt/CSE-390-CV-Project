@@ -59,16 +59,16 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             dueTime
         );
         final int pos = position;
-        final String id = PlannerContent.ITEMS.get(position).getId();
+
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
+                String id = PlannerContent.ITEMS.get(pos).getId();
                 PlanDialog planDialog = new PlanDialog();
                 planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString(), holder.descriptionView.getText().toString());
-                planDialog.givingDetails(id);
+                planDialog.givingDetails(id, pos);
                 planDialog.setTargetFragment(plannerFragment, 100);
-                planDialog.show(  plannerFragment.getParentFragmentManager(), "Edit Plan Dialog");
+                planDialog.show( plannerFragment.getParentFragmentManager(), "Edit Plan Dialog");
                 return true;
             }
         });

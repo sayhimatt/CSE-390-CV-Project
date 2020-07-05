@@ -33,7 +33,7 @@ public class PlanDialog extends DialogFragment {
     private boolean isDetails = false;
     private TextView titleDialog;
     private String itemToEditID;
-
+    private int positionToEdit;
 
     @NonNull
     @Override
@@ -70,12 +70,13 @@ public class PlanDialog extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String name = planNameET.getText().toString();
-                    String subject = planSubjectET.getText().toString();
+                    String category = planSubjectET.getText().toString();
                     String desc = planDescET.getText().toString();
                     MainActivity activity = (MainActivity) getActivity();
                     Date userDate = activity.getDateSet();
+                    PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, category, desc, false, userDate, itemToEditID);
                     planDialogListener = (PlanDialogListener) getTargetFragment();
-                    planDialogListener.editItem(itemToEditID, name, subject, desc, userDate);
+                    planDialogListener.editItem(itemToEditID, pi, positionToEdit);
                 }
             });
         }else{
@@ -83,11 +84,11 @@ public class PlanDialog extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String name = planNameET.getText().toString();
-                    String subject = planSubjectET.getText().toString();
+                    String category = planSubjectET.getText().toString();
                     String desc = planDescET.getText().toString();
                     MainActivity activity = (MainActivity) getActivity();
                     Date userDate = activity.getDateSet();
-                    PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, subject, desc, false, userDate, "1");
+                    PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, category, desc, false, userDate, "1");
                     planDialogListener.addPlanToList(pi);
                 }
             });
@@ -102,9 +103,10 @@ public class PlanDialog extends DialogFragment {
         return builder.create();
     }
 
-    public void givingDetails(String id){
+    public void givingDetails(String id, int position){
         isDetails = true;
         this.itemToEditID = id;
+        this.positionToEdit = position;
     }
     public void setDetails(int pos, String name, String subject, String description){
         this.pos = pos;
@@ -125,6 +127,6 @@ public class PlanDialog extends DialogFragment {
 
     public interface PlanDialogListener{
         void addPlanToList(PlannerContent.PlannerItem pi);
-        void editItem(String id, String name, String subject, String desc, Date userDate);
+        void editItem(String id, PlannerContent.PlannerItem pi, int position);
     }
 }

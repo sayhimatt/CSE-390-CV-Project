@@ -7,24 +7,15 @@ import android.app.TaskStackBuilder;
 import android.content.Intent ;
 import android.os.Handler ;
 import android.os.IBinder ;
-import android.util.Log ;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer ;
@@ -65,7 +56,7 @@ public class NotificationService extends Service {
         timer = new Timer() ;
         initializeTimerTask() ;
         // 36000000
-        timer.schedule( timerTask , 5000 , Your_X_SECS * 1000 ) ;
+        timer.schedule( timerTask , 36000000 , Your_X_SECS * 1000 ) ;
     }
     public void stopTimerTask () {
         if ( timer != null ) {

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String input = String.valueOf(dayOfMonth) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+        String input = String.valueOf(dayOfMonth) + "-" + String.valueOf(month+1) + "-" + String.valueOf(year);
         try {
             Date inputDate = format.parse(input);
             setDateSet(inputDate);

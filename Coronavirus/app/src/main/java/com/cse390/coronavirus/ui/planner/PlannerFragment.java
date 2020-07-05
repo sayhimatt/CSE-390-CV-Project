@@ -110,8 +110,13 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     @Override
-    public void editItem(String id, String name, String subject, String desc, Date userDate) {
-
+    public void editItem(String id, PlannerContent.PlannerItem pi, int position) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("PlannerItems");
+        DatabaseReference itemReference = ref.child(id);
+        System.out.println(id);
+        itemReference.setValue(pi);
+        PlannerContent.ITEMS.set(position, pi);
+        planList.getAdapter().notifyDataSetChanged();
     }
 
     private void initAuth() {
