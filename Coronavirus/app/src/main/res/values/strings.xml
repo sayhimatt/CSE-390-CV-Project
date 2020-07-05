@@ -31,9 +31,7 @@
     <string-array name="list_sort_array">
         <item>Planner</item>
         <item>Fun</item>
-
     </string-array>
-
 
     <string-array name="item_sort_criteria_array_planner">
         <item>Category</item>

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,21 +37,39 @@ public class SettingsFragment extends Fragment {
         sortOrderSpinner = root.findViewById(R.id.sort_order_spinner);
         sortListSpinner = root.findViewById(R.id.sort_list_spinner);
 
-        ArrayAdapter<CharSequence> criteriaAdapter = ArrayAdapter.createFromResource(context,
+        final ArrayAdapter<CharSequence> criteriaAdapterPlanner = ArrayAdapter.createFromResource(context,
                 R.array.item_sort_criteria_array_planner, R.layout.spinner_item_sorting);
         ArrayAdapter<CharSequence> orderAdapter = ArrayAdapter.createFromResource(context,
                 R.array.item_sort_order_array, R.layout.spinner_item_sorting);
         ArrayAdapter<CharSequence> sortListAdapter = ArrayAdapter.createFromResource(context,
                 R.array.list_sort_array, R.layout.spinner_item_sorting);
+        final ArrayAdapter<CharSequence> criteriaAdapterFun = ArrayAdapter.createFromResource(context,
+                R.array.item_sort_criteria_array_fun, R.layout.spinner_item_sorting);
 
-
-        criteriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        criteriaAdapterPlanner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         orderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        criteriaAdapterFun.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        sortCriteriaSpinner.setAdapter(criteriaAdapter);
+        sortCriteriaSpinner.setAdapter(criteriaAdapterPlanner);
         sortOrderSpinner.setAdapter(orderAdapter);
         sortListSpinner.setAdapter(sortListAdapter);
+
+        sortListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1){
+                    sortCriteriaSpinner.setAdapter(criteriaAdapterFun);
+                }else if (position == 0){
+                    sortCriteriaSpinner.setAdapter(criteriaAdapterPlanner);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         return root;
