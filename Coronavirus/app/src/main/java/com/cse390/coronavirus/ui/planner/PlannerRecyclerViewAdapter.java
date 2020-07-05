@@ -8,7 +8,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
@@ -24,10 +26,12 @@ import java.util.List;
 public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecyclerViewAdapter.ViewHolder> {
     private final List<PlannerContent.PlannerItem> mValues;
     private static final String DATE_FORMAT = "EEE, d MMM yyyy";
+    private PlannerFragment plannerFragment;
     private Context c;
-    public PlannerRecyclerViewAdapter(List<PlannerContent.PlannerItem> items, Context c){
+    public PlannerRecyclerViewAdapter(List<PlannerContent.PlannerItem> items, PlannerFragment plannerFragment, Context context){
         mValues = items;
-        this.c = c;
+        this.plannerFragment = plannerFragment;
+        this.c = context;
     }
 
     @Override
@@ -41,10 +45,10 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.categoryView.setText(mValues.get(position).getCategory());
-        holder.subjectView.setText(mValues.get(position).getSubject());
+        holder.categoryView.setText(mValues.get(position).getName());
+        System.out.println(mValues.get(position).getName());
+        holder.subjectView.setText(mValues.get(position).getCategory());
         holder.descriptionView.setText(mValues.get(position).getDescription());
-
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         String dueTime = "";
         try{
@@ -56,14 +60,16 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             dueTime
         );
         final int pos = position;
+        final String id = PlannerContent.ITEMS.get(position).getId();
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                PlanDialog planDialog = new PlanDialog();
 
+                PlanDialog planDialog = new PlanDialog();
                 planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString(), holder.descriptionView.getText().toString());
-                planDialog.givingDetails();
-                planDialog.show(((FragmentActivity)c).getSupportFragmentManager(), "Edit Plan Dialog");
+                planDialog.givingDetails(id);
+                planDialog.setTargetFragment(plannerFragment, 100);
+                planDialog.show(  plannerFragment.getParentFragmentManager(), "Edit Plan Dialog");
                 return true;
             }
         });

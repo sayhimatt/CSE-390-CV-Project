@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.cse390.coronavirus.R;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.List;
 
 public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogListener {
@@ -37,7 +38,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     private static List<PlannerContent.PlannerItem> mValues = PlannerContent.ITEMS;
     private FirebaseAuth mAuth;
     private String currentUserID;
-
+    private PlannerFragment plannerFragment = PlannerFragment.this;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,8 +69,6 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.planner_fragment, container, false);
         initAuth();
-
-
         // Set the adapter
         if (view.findViewById(R.id.planner_list) instanceof RecyclerView) {
 
@@ -83,10 +82,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
             } else {
                 planList.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
-
-
-            planList.setAdapter(new PlannerRecyclerViewAdapter(mValues,getContext()));
+            planList.setAdapter(new PlannerRecyclerViewAdapter(mValues,plannerFragment, getContext()));
 
             FloatingActionButton addB = view.findViewById(R.id.add_planner_fab);
             addB.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +104,11 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         ref.child(id).setValue(pi);
         PlannerContent.addItem(pi);
         planList.getAdapter().notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void editItem(String id, String name, String subject, String desc, Date userDate) {
 
     }
 

@@ -34,8 +34,8 @@
     </string-array>
 
     <string-array name="item_sort_criteria_array_planner">
+        <item>Name</item>
         <item>Category</item>
-        <item>Subject</item>
         <item>Description</item>
         <item>Completed</item>
         <item>Due Date</item>

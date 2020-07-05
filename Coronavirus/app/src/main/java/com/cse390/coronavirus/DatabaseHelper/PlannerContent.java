@@ -58,31 +58,32 @@ public class PlannerContent {
     }
 
     public static class PlannerItem {
+        private String name;
         private String category;
-        private String subject;
         private String description;
         private boolean completed;
         private Date dueDate;
         private String id;
 
+
         public PlannerItem(){}
 
 
-        public PlannerItem(String category, String subject, String description, boolean completed, Date dueDate, String id){
-            this.category = category;
+        public PlannerItem(String name,String category,String description, boolean completed, Date dueDate, String id){
+            this.name = name;
             this.description = description;
-            this.subject = subject;
+            this.category = category;
             this.completed = completed;
             this.dueDate = dueDate;
             this.id = id;
         }
 
-        public String getCategory() {
-            return category;
+        public String getName() {
+            return name;
         }
 
-        public void setCategory(String category) {
-            this.category = category;
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getDescription() {
@@ -117,12 +118,12 @@ public class PlannerContent {
             this.id = id;
         }
 
-        public void setSubject(String subject) {
-            this.subject = subject;
+        public void setCategory(String category) {
+            this.category = category;
         }
 
-        public String getSubject() {
-            return subject;
+        public String getCategory() {
+            return category;
         }
 
         @Override
@@ -130,7 +131,7 @@ public class PlannerContent {
 
 
             final PlannerContent.PlannerItem other = (PlannerContent.PlannerItem) obj;
-            if (this.category.equals(other.category) && this.subject.equals(other.subject) && this.description.equals(other.description)
+            if (this.name.equals(other.name) && this.category.equals(other.category) && this.description.equals(other.description)
                     && this.completed == other.completed && this.dueDate.equals(other.dueDate) && this.id.equals(other.id)
             ){
                 return true;

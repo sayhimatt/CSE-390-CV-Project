@@ -32,6 +32,7 @@ public class PlanDialog extends DialogFragment {
     private int pos;
     private boolean isDetails = false;
     private TextView titleDialog;
+    private String itemToEditID;
 
 
     @NonNull
@@ -64,40 +65,46 @@ public class PlanDialog extends DialogFragment {
                 dismiss();
             }
         });
-        builder.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String name = planNameET.getText().toString();
-                String subject = planSubjectET.getText().toString();
-                String desc = planDescET.getText().toString();
-                MainActivity activity = (MainActivity) getActivity();
-                Date userDate = activity.getDateSet();
-
-                PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, subject, desc, false, userDate, "1");
-
-                if(isDetails){
-                    PlannerContent.editItem(pos, pi);
-                }else {
+        if (isDetails){
+            builder.setView(view).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String name = planNameET.getText().toString();
+                    String subject = planSubjectET.getText().toString();
+                    String desc = planDescET.getText().toString();
+                    MainActivity activity = (MainActivity) getActivity();
+                    Date userDate = activity.getDateSet();
                     planDialogListener = (PlanDialogListener) getTargetFragment();
+                    planDialogListener.editItem(itemToEditID, name, subject, desc, userDate);
+                }
+            });
+        }else{
+            builder.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String name = planNameET.getText().toString();
+                    String subject = planSubjectET.getText().toString();
+                    String desc = planDescET.getText().toString();
+                    MainActivity activity = (MainActivity) getActivity();
+                    Date userDate = activity.getDateSet();
+                    PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, subject, desc, false, userDate, "1");
                     planDialogListener.addPlanToList(pi);
                 }
-            }
-        });
+            });
+        }
 
         if(isDetails){
             planNameET.setText(name);
             planSubjectET.setText(subject);
             planDescET.setText(description);
             titleDialog.setText(R.string.edit_plan_item_text);
-
         }
-
-
-
         return builder.create();
     }
-    public void givingDetails(){
+
+    public void givingDetails(String id){
         isDetails = true;
+        this.itemToEditID = id;
     }
     public void setDetails(int pos, String name, String subject, String description){
         this.pos = pos;
@@ -105,8 +112,6 @@ public class PlanDialog extends DialogFragment {
         this.subject = subject;
         this.description = description;
     }
-
-
 
     @Override
     public void onAttach(Context c){
@@ -118,9 +123,8 @@ public class PlanDialog extends DialogFragment {
         }
     }
 
-
-
     public interface PlanDialogListener{
         void addPlanToList(PlannerContent.PlannerItem pi);
+        void editItem(String id, String name, String subject, String desc, Date userDate);
     }
 }
