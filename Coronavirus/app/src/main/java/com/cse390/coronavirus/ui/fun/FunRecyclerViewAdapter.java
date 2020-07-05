@@ -38,7 +38,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mCategoryView.setText(mValues.get(position).getCategory());
-        holder.mNameView.setText(mValues.get(position).getDescription());
+        holder.mNameView.setText(mValues.get(position).getName());
         holder.mDescView.setText(mValues.get(position).getDescription());
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

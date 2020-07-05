@@ -11,13 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.cse390.coronavirus.DatabaseHelper.FunContent;
+import com.cse390.coronavirus.MainActivity;
 import com.cse390.coronavirus.R;
+import com.cse390.coronavirus.SignUpActivity;
 import com.cse390.coronavirus.dummy.DummyContent;
+import com.cse390.coronavirus.ui.fun.FunFragment;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class GenerateFunDialog extends DialogFragment {
     private RadioGroup answersRG;
@@ -25,11 +35,19 @@ public class GenerateFunDialog extends DialogFragment {
     private Button submitAnsB;
     private boolean lastQuestion;
     private GenerateFunListener generateFunListener;
+    String[] questions = new String[]{"Do you like movies?", "Do you like the outdoors?", "Do you like games?"};
+    String[] movies = new String[]{"Star Wars", "The Godfather", "Kill Bill"};
+    String[] outdoors = new String[]{"Hiking" , "Camping", "Park Walk"};
+    String[] games = new String[]{"Cards Against Humanity","Monopoly","Game Of Life"};
+    String[][] activities = new String[][]{movies, outdoors, games};
+    String[] categoriesGenerated = new String[]{"Movie", "Outdoor", "Game"};
+    private int optionsSelected;
+    private List<FunContent.FunItem> generatedItems = new ArrayList<>();
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_gen_fun, null);
@@ -38,29 +56,36 @@ public class GenerateFunDialog extends DialogFragment {
         questionTV = (TextView)view.findViewById(R.id.question_fun_tv);
         submitAnsB = (Button) view.findViewById(R.id.submit_b);
         lastQuestion = false;
-        questionTV.setText("Do you like movies?");
-
+        optionsSelected = 0;
+        setQuestion(optionsSelected);
 
         submitAnsB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // DO STUFF HERE FOR NEXT
-                if(!lastQuestion){
-
-                    if (answersRG.getCheckedRadioButtonId() == -1){
-
-                    }else{
-                        // Get Value Selected and Save The Value
-                    }
-
-                    nextQuestion();
+                if (answersRG.getCheckedRadioButtonId() == -1){
+                    Toast.makeText(getActivity() , "Please Select An Option", Toast.LENGTH_SHORT).show();
                 }else{
-                    dismiss();
+                    optionsSelected++;
+                    switch (optionsSelected){
+                        case 1:
+                            getItems(0);
+                            break;
+                        case 2:
+                            getItems(1);
+                            break;
+                        case 3:
+                            getItems(2);
+                            generateFunListener = (GenerateFunDialog.GenerateFunListener)getTargetFragment();
+                            generateFunListener.addFunItemsToList(generatedItems);
+                            dismiss();
+                            break;
+                        default:
+                            break;
+                    }
+                    setQuestion(optionsSelected);
                 }
             }
         });
-
-
 
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -68,29 +93,49 @@ public class GenerateFunDialog extends DialogFragment {
                 dismiss();
             }
         });
-/*        builder.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                DummyContent.DummyItem di = new DummyContent.DummyItem("Matt","can't","code");
-
-                generateFunListener = (GenerateFunListener)getTargetFragment();
-
-                generateFunListener.addFunToList(di);
-            }
-        });*/
         return builder.create();
     }
 
-    public void nextQuestion(){
-        lastQuestion = true;
+    private void getItems(int activitiesListIndex){
+
+        String category = categoriesGenerated[activitiesListIndex];
+        ArrayList<Integer> indices = new ArrayList<Integer>();
+        for (int i = 0; i < activities[activitiesListIndex].length; i++){
+            indices.add(new Integer(i));
+        }
+        Collections.shuffle(indices);
+        FunContent.FunItem funItem1 = new FunContent.FunItem(category, "", activities[activitiesListIndex][indices.get(0)], false, "1");
+        FunContent.FunItem funItem2 = new FunContent.FunItem(category, "", activities[activitiesListIndex][indices.get(1)], false, "1");
+        FunContent.FunItem funItem3 = new FunContent.FunItem(category, "", activities[activitiesListIndex][indices.get(2)], false, "1");
+
+        switch (answersRG.getCheckedRadioButtonId()){
+            case R.id.ans_1_rb:
+                generatedItems.add(funItem1);
+                generatedItems.add(funItem2);
+                generatedItems.add(funItem3);
+                break;
+            case R.id.ans_2_rb:
+                generatedItems.add(funItem1);
+                generatedItems.add(funItem2);
+                break;
+            case R.id.ans_3_rb:
+                generatedItems.add(funItem1);
+                break;
+            default:
+                break;
+        }
     }
 
+    private void setQuestion(int questionIndex){
+        if (questionIndex <= 2){
+            questionTV.setText(questions[questionIndex]);
+        }
+    }
 
     @Override
     public void onAttach(Context c){
         super.onAttach(c);
-
         try {
             generateFunListener = (GenerateFunDialog.GenerateFunListener)getTargetFragment();
         } catch (ClassCastException e) {
@@ -98,6 +143,6 @@ public class GenerateFunDialog extends DialogFragment {
         }
     }
     public interface GenerateFunListener{
-        void addFunToList(DummyContent.DummyItem di);
+        void addFunItemsToList(List<FunContent.FunItem> funItemsList);
     }
 }

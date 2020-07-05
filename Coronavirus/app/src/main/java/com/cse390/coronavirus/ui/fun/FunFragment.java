@@ -188,7 +188,15 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
 
 
     @Override
-    public void addFunToList(DummyContent.DummyItem di) {
-        
+    public void addFunItemsToList(List<FunContent.FunItem> funItemsList) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");
+        for (int i = 0; i < funItemsList.size(); i++){
+            FunContent.FunItem fi = funItemsList.get(i);
+            String id = ref.push().getKey();
+            fi.setId(id);
+            ref.child(id).setValue(fi);
+            FunContent.addItem(fi);
+        }
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
