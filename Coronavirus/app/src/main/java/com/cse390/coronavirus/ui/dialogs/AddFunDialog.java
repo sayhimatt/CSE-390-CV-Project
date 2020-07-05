@@ -35,18 +35,6 @@ public class AddFunDialog extends DialogFragment{
         funName = view.findViewById(R.id.fun_name);
         funDescription = view.findViewById(R.id.fun_description);
 
-        /*
-        Button dateB = view.findViewById(R.id.date_pickf_b);
-        dateB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment datePicker = new DatePicker();
-                datePicker.show(getChildFragmentManager(), "Date Picker");
-            }
-        });
-        */
-
-
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -83,7 +71,7 @@ public class AddFunDialog extends DialogFragment{
     public void onAttach(Context c){
         super.onAttach(c);
         try {
-            funDialogListener = (FunDialogListener) c;
+            funDialogListener = (FunDialogListener)getTargetFragment();
         } catch (ClassCastException e) {
             throw new ClassCastException(getContext().toString() + " does not implement FunDialogListener");
         }

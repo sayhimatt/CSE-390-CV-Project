@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.R;
+import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
 import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener {
+public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener, GenerateFunDialog.GenerateFunListener {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -186,4 +187,8 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
 
+    @Override
+    public void addFunToList(DummyContent.DummyItem di) {
+        
+    }
 }

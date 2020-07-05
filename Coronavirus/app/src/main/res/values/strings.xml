@@ -13,9 +13,14 @@
     <string name="fun_activity_category">Fun Activity Category</string>
     <string name="add_fun_activity">Add Fun Activity</string>
     <string name="description">Description</string>
-    <string name="today_s_plans">Today\'s Plans</string>
+    <string name="today_s_plans">My\ Plans</string>
     <string name="sign_out">Sign out</string>
     <string name="account">Account</string>
     <string name="completed_s">Completed</string>
     <string name="choose_date_s">Choose Date</string>
+    <string name="edit_plan_item_text">Edit Plan Item</string>
+    <string name="default_edit_action">Edit</string>
+    <string name="default_hide_description">Hide\nDetails</string>
+    <string name="default_show_description">Show\nDetails</string>
+
 </resources>

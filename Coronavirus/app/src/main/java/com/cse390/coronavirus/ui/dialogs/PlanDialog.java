@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +26,14 @@ import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import java.util.Date;
 
 public class PlanDialog extends DialogFragment {
-    private String name, subject;
+    private String name, subject, description;
     private EditText planNameET, planSubjectET, planDescET;
     private PlanDialogListener planDialogListener;
     private int pos;
     private boolean isDetails = false;
+    private TextView titleDialog;
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class PlanDialog extends DialogFragment {
         planNameET = view.findViewById(R.id.plan_et);
         planSubjectET = view.findViewById(R.id.plan_subject_et);
         planDescET = view.findViewById(R.id.description_et);
-
+        titleDialog = view.findViewById(R.id.add_item_header_tv);
 
 
         Button dateB = view.findViewById(R.id.date_pick_b);
@@ -53,9 +57,6 @@ public class PlanDialog extends DialogFragment {
 
             }
         });
-
-
-
 
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -82,9 +83,13 @@ public class PlanDialog extends DialogFragment {
                 }
             }
         });
+
         if(isDetails){
             planNameET.setText(name);
             planSubjectET.setText(subject);
+            planDescET.setText(description);
+            titleDialog.setText(R.string.edit_plan_item_text);
+
         }
 
 
@@ -94,11 +99,15 @@ public class PlanDialog extends DialogFragment {
     public void givingDetails(){
         isDetails = true;
     }
-    public void setDetails(int pos, String name, String subject){
+    public void setDetails(int pos, String name, String subject, String description){
         this.pos = pos;
         this.name = name;
         this.subject = subject;
+        this.description = description;
     }
+
+
+
     @Override
     public void onAttach(Context c){
         super.onAttach(c);

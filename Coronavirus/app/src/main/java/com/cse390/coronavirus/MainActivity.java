@@ -26,7 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDialogListener, AddFunDialog.FunDialogListener, DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
     private String currentUserID;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
+
         }catch (Exception e){
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivityForResult(intent, SIGN_UP_ACTIVITY_CODE);
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
         super.onStop();
 
         if (currentUserID != null){
+            System.out.println("Notify");
             startService( new Intent( this, NotificationService. class )) ;
         }
     }
@@ -77,18 +79,6 @@ public class MainActivity extends AppCompatActivity implements PlanDialog.PlanDi
         if (currentUserID != null){
             startService( new Intent( this, NotificationService. class )) ;
         }
-    }
-
-
-    @Override
-    public void addPlanToList(PlannerContent.PlannerItem di) {
-            // Add the plan to the list
-
-    }
-
-    @Override
-    public void addFunToList(FunContent.FunItem fi) {
-            /// Add the fun to the list
     }
 
     @Override

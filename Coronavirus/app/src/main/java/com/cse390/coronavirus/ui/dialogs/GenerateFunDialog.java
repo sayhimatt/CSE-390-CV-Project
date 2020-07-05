@@ -83,12 +83,12 @@ public class GenerateFunDialog extends DialogFragment {
     @Override
     public void onAttach(Context c){
         super.onAttach(c);
-        // disabled for now
-/*        try {
-            generateFunListener = (GenerateFunListener) c;
+
+        try {
+            generateFunListener = (GenerateFunDialog.GenerateFunListener)getTargetFragment();
         } catch (ClassCastException e) {
             throw new ClassCastException(getContext().toString() + " does not implement FunDialogListener");
-        }*/
+        }
     }
     public interface GenerateFunListener{
         void addFunToList(DummyContent.DummyItem di);

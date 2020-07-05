@@ -44,6 +44,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         holder.categoryView.setText(mValues.get(position).getCategory());
         holder.subjectView.setText(mValues.get(position).getSubject());
         holder.descriptionView.setText(mValues.get(position).getDescription());
+
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         String dueTime = "";
         try{
@@ -59,12 +60,15 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             @Override
             public boolean onLongClick(View v) {
                 PlanDialog planDialog = new PlanDialog();
-                planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString());
+
+                planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString(), holder.descriptionView.getText().toString());
                 planDialog.givingDetails();
                 planDialog.show(((FragmentActivity)c).getSupportFragmentManager(), "Edit Plan Dialog");
                 return true;
             }
         });
+
+
 
     }
 
