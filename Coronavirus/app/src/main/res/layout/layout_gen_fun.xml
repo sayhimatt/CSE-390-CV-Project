@@ -24,8 +24,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/submit_b"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,35 +31,43 @@
 
         <RadioButton
             android:id="@+id/ans_1_rb"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:layout_weight="1"
-            android:text="Absolutely" />
+            android:layout_margin="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Choice 1"
+            android:textAlignment="center" />
 
         <RadioButton
             android:id="@+id/ans_2_rb"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:layout_weight="1"
-            android:text="Okay" />
+            android:layout_margin="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Choice 2"
+            android:textAlignment="center" />
 
         <RadioButton
             android:id="@+id/ans_3_rb"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:layout_weight="1"
-            android:text="Not Really" />
+            android:layout_margin="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Choice 3"
+            android:textAlignment="center" />
 
         <RadioButton
             android:id="@+id/ans_4_rb"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:layout_weight="1"
-            android:text="No" />
+            android:layout_margin="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Choice 4"
+            android:textAlignment="center" />
     </RadioGroup>
 
     <Button
