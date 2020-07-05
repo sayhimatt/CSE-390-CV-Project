@@ -3,6 +3,7 @@ package com.cse390.coronavirus.DatabaseHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +65,6 @@ public class PlannerContent {
         private boolean completed;
         private Date dueDate;
         private String id;
-
 
         public PlannerItem(){}
 
@@ -128,8 +128,6 @@ public class PlannerContent {
 
         @Override
         public boolean equals(@Nullable Object obj) {
-
-
             final PlannerContent.PlannerItem other = (PlannerContent.PlannerItem) obj;
             if (this.name.equals(other.name) && this.category.equals(other.category) && this.description.equals(other.description)
                     && this.completed == other.completed && this.dueDate.equals(other.dueDate) && this.id.equals(other.id)
@@ -138,7 +136,82 @@ public class PlannerContent {
             }else{
                 return false;
             }
-
         }
     }
+
+    public static class PlannerItemCategoryComparator implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return o1.category.compareTo(o2.category);
+        }
+    }
+
+    public static class PlannerItemNameComparator implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    }
+
+    public static class PlannerItemDescriptionComparator implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return o1.description.compareTo(o2.description);
+        }
+    }
+
+    public static class PlannerItemCompletedComparator implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            Boolean completed1 = o1.completed;
+            Boolean completed2 = o2.completed;
+            return completed1.compareTo(completed2);
+        }
+    }
+
+    public static class PlannerItemDateComparator implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return -o1.dueDate.compareTo(o2.dueDate);
+        }
+    }
+
+    public static class PlannerItemCategoryComparatorReverse implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return -o1.category.compareTo(o2.category);
+        }
+    }
+
+    public static class PlannerItemNameComparatorReverse implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return -o1.name.compareTo(o2.name);
+        }
+    }
+
+    public static class PlannerItemDescriptionComparatorReverse implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return -o1.description.compareTo(o2.description);
+        }
+    }
+
+    public static class PlannerItemCompletedComparatorReverse implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            Boolean completed1 = o1.completed;
+            Boolean completed2 = o2.completed;
+            return -completed1.compareTo(completed2);
+        }
+    }
+
+    public static class PlannerItemDateComparatorReverse implements Comparator<PlannerItem> {
+        @Override
+        public int compare(PlannerItem o1, PlannerItem o2) {
+            return -o1.dueDate.compareTo(o2.dueDate);
+        }
+    }
+
+
 }

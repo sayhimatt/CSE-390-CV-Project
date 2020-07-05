@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
+import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
@@ -27,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener, GenerateFunDialog.GenerateFunListener {
@@ -164,10 +167,45 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         }).attachToRecyclerView(recyclerView);
     }
 
+    private void sortFunItems(ArrayList<String> sortFields){
+        if (sortFields.get(1).equals("ascending")){
+            switch(sortFields.get(0)){
+                case "description":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemDescriptionComparator());
+                    break;
+                case "category":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemCategoryComparator());
+                    break;
+                case "name":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemNameComparator());
+                    break;
+                case "completed":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemCompletedComparator());
+                    break;
+            }
+        }else if(sortFields.get(1).equals("descending")){
+            switch(sortFields.get(0)){
+                case "description":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemDescriptionComparatorReverse());
+                    break;
+                case "category":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemCategoryComparatorReverse());
+                    break;
+                case "name":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemNameComparatorReverse());
+                    break;
+                case "completed":
+                    Collections.sort(FunContent.ITEMS, new FunContent.FunItemCompletedComparatorReverse());
+                    break;
+            }
+        }
+    }
+
     private void retrieveFunItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("FunItems");
-        plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference funItems = database.child("Users").child(currentUserID).child("FunItems");
+        DatabaseReference sortFields = database.child("Users").child(currentUserID).child("FunItemsSort");
+        funItems.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
@@ -176,6 +214,24 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                         FunContent.addItem(item);
                     }
                 }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        sortFields.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> sortFields = new ArrayList<>();
+                for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
+                    String item = singleSnapShot.getValue(String.class);
+                    sortFields.add(item.toLowerCase());
+                }
+                sortFunItems(sortFields);
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -127,4 +128,66 @@ public class FunContent {
             }
         }
     }
+
+    public static class FunItemCategoryComparator implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            return o1.category.compareTo(o2.category);
+        }
+    }
+
+    public static class FunItemNameComparator implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    }
+
+    public static class FunItemDescriptionComparator implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            return o1.description.compareTo(o2.description);
+        }
+    }
+
+    public static class FunItemCompletedComparator implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            Boolean completed1 = o1.completed;
+            Boolean completed2 = o2.completed;
+            return completed1.compareTo(completed2);
+        }
+    }
+
+    public static class FunItemCategoryComparatorReverse implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            return -o1.category.compareTo(o2.category);
+        }
+    }
+
+    public static class FunItemNameComparatorReverse implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            return -o1.name.compareTo(o2.name);
+        }
+    }
+
+    public static class FunItemDescriptionComparatorReverse implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            return -o1.description.compareTo(o2.description);
+        }
+    }
+
+    public static class FunItemCompletedComparatorReverse implements Comparator<FunContent.FunItem> {
+        @Override
+        public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
+            Boolean completed1 = o1.completed;
+            Boolean completed2 = o2.completed;
+            return -completed1.compareTo(completed2);
+        }
+    }
+
+
 }

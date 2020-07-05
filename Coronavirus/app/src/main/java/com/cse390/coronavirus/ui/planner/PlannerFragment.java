@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.cse390.coronavirus.R;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -160,9 +162,51 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
 
     }
 
+    private void sortPlannerItems(ArrayList<String> sortFields){
+        // Get the sortCriteria
+        if (sortFields.get(1).equals("ascending")){
+            switch(sortFields.get(0)){
+                case "description":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemDescriptionComparator());
+                    break;
+                case "category":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemCategoryComparator());
+                    break;
+                case "name":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemNameComparator());
+                    break;
+                case "due date":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemDateComparator());
+                    break;
+                case "completed":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemCompletedComparator());
+                    break;
+            }
+        }else if(sortFields.get(1).equals("descending")){
+            switch(sortFields.get(0)){
+                case "description":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemDescriptionComparatorReverse());
+                    break;
+                case "category":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemCategoryComparatorReverse());
+                    break;
+                case "name":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemNameComparatorReverse());
+                    break;
+                case "due date":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemDateComparatorReverse());
+                    break;
+                case "completed":
+                    Collections.sort(PlannerContent.ITEMS, new PlannerContent.PlannerItemCompletedComparatorReverse());
+                    break;
+            }
+        }
+    }
+
     private void retrievePlannerItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
+        DatabaseReference sortFields = database.child("Users").child(currentUserID).child("PlannerItemsSort");
         plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -181,9 +225,23 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
 
             }
         });
+
+        sortFields.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> sortFields = new ArrayList<>();
+                for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
+                    String item = singleSnapShot.getValue(String.class);
+                    sortFields.add(item.toLowerCase());
+                }
+                sortPlannerItems(sortFields);
+                planList.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
-
-
-
-
 }

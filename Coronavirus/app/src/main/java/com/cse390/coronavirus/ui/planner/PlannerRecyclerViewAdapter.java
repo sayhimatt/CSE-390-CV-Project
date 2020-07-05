@@ -46,7 +46,6 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.categoryView.setText(mValues.get(position).getName());
-        System.out.println(mValues.get(position).getName());
         holder.subjectView.setText(mValues.get(position).getCategory());
         holder.descriptionView.setText(mValues.get(position).getDescription());
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -73,9 +72,6 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
                 return true;
             }
         });
-
-
-
     }
 
     @Override
