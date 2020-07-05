@@ -15,10 +15,11 @@
         <TextView
             android:id="@+id/category_tv"
 
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/text_margin"
-            android:layout_width="80dp"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/filler_matt_s"
@@ -26,14 +27,14 @@
 
         <TextView
             android:id="@+id/name_tv"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/text_margin"
             android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
-            android:gravity="center"
             android:text="@string/filler_matt_s"
+            android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <CheckBox
@@ -50,7 +51,6 @@
         android:id="@+id/descf_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="@dimen/text_margin"
         android:singleLine="true"
         android:text="@string/filler_matt_s"
