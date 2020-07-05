@@ -38,6 +38,7 @@ public class GenerateFunDialog extends DialogFragment {
         questionTV = (TextView)view.findViewById(R.id.question_fun_tv);
         submitAnsB = (Button) view.findViewById(R.id.submit_b);
         lastQuestion = false;
+        questionTV.setText("Do you like movies?");
 
 
         submitAnsB.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,12 @@ public class GenerateFunDialog extends DialogFragment {
             public void onClick(View v) {
                 // DO STUFF HERE FOR NEXT
                 if(!lastQuestion){
+
+                    if (answersRG.getCheckedRadioButtonId() == -1){
+
+                    }else{
+                        // Get Value Selected and Save The Value
+                    }
 
                     nextQuestion();
                 }else{
