@@ -58,13 +58,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-
         }
-
     }
 
     @Override

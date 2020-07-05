@@ -22,5 +22,32 @@
     <string name="default_edit_action">Edit</string>
     <string name="default_hide_description">Hide\nDetails</string>
     <string name="default_show_description">Show\nDetails</string>
+    <string name="sort_your_items">Sort Your Items!</string>
+    <string-array name="item_sort_order_array">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+
+    <string-array name="list_sort_array">
+        <item>Planner</item>
+        <item>Fun</item>
+
+    </string-array>
+
+
+    <string-array name="item_sort_criteria_array_planner">
+        <item>Category</item>
+        <item>Subject</item>
+        <item>Description</item>
+        <item>Completed</item>
+        <item>Due Date</item>
+    </string-array>
+
+    <string-array name="item_sort_criteria_array_fun">
+        <item>Category</item>
+        <item>Name</item>
+        <item>Description</item>
+        <item>Completed</item>
+    </string-array>
 
 </resources>

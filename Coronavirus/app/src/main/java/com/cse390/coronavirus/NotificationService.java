@@ -97,10 +97,6 @@ public class NotificationService extends Service {
         }
 
         if (numberOfItemsDueToday > 0){
-            Intent snoozeIntent = new Intent(this, MainActivity.class);
-
-
-
             NotificationManager mNotificationManager = (NotificationManager)getSystemService( NOTIFICATION_SERVICE ) ;
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext() , default_notification_channel_id ) ;
             mBuilder.setContentTitle( "To Cheer You On!" ) ;
