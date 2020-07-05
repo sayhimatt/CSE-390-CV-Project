@@ -42,8 +42,8 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.categoryView.setText(mValues.get(position).getCategory());
-        holder.subjectView.setText(mValues.get(position).getDescription());
-
+        holder.subjectView.setText(mValues.get(position).getSubject());
+        holder.descriptionView.setText(mValues.get(position).getDescription());
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         String dueTime = "";
         try{

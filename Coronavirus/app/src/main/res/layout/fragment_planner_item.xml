@@ -7,39 +7,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/category_tv"
-            android:layout_width="80dp"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_weight="1"
 
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="@string/filler_matt_s"
             android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+id/name_tv"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_weight="1"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:singleLine="true"
             android:text="@string/filler_matt_s"
             android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+id/due_date_tv"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="end"
+            android:layout_weight="0"
             android:maxLines="1"
+            android:singleLine="true"
             android:text="@string/filler_matt_s"
             android:textAlignment="textStart"
             android:textAppearance="?attr/textAppearanceListItem" />
@@ -48,8 +47,9 @@
             android:id="@+id/completed_cb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
+            android:layout_weight="0"
             android:clickable="false"
+            android:singleLine="true"
             android:text="@string/completed_s" />
 
 
