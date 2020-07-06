@@ -25,39 +25,41 @@ public class PlannerContent {
      */
     public static final Map<String, PlannerItem> ITEM_MAP = new HashMap<>();
 
+    /**
+     * @param items
+     */
     public static void setItems(List<PlannerItem> items){
         ITEMS = items;
     }
 
+    /**
+     * @param item
+     */
     public static void addItem(PlannerItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
+    /**
+     * @param index
+     */
     public static void removeItem(int index) {
         PlannerItem item = ITEMS.get(index);
         ITEMS.remove(index);
     }
 
-    public static void editItem(int index, PlannerItem item){
-        ITEMS.add(index,item);
-        ITEM_MAP.put(item.id, item);
-    }
-
+    /**
+     * @param index
+     * @return
+     */
     public static PlannerItem getItem(int index){
         PlannerItem item = ITEMS.get(index);
         return  item;
     }
 
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
-    }
-
+    /**
+     *
+     */
     public static class PlannerItem {
         private String name;
         private String category;
@@ -66,9 +68,20 @@ public class PlannerContent {
         private Date dueDate;
         private String id;
 
+        /**
+         *
+         */
         public PlannerItem(){}
 
 
+        /**
+         * @param name
+         * @param category
+         * @param description
+         * @param completed
+         * @param dueDate
+         * @param id
+         */
         public PlannerItem(String name,String category,String description, boolean completed, Date dueDate, String id){
             this.name = name;
             this.description = description;
@@ -78,54 +91,94 @@ public class PlannerContent {
             this.id = id;
         }
 
+        /**
+         * @return
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         * @param name
+         */
         public void setName(String name) {
             this.name = name;
         }
 
+        /**
+         * @return
+         */
         public String getDescription() {
             return description;
         }
 
+        /**
+         * @param description
+         */
         public void setDescription(String description) {
             this.description = description;
         }
 
+        /**
+         * @return
+         */
         public boolean isCompleted() {
             return completed;
         }
 
+        /**
+         * @param completed
+         */
         public void setCompleted(boolean completed) {
             this.completed = completed;
         }
 
+        /**
+         * @param dueDate
+         */
         public void setDueDate(Date dueDate) {
             this.dueDate = dueDate;
         }
 
+        /**
+         * @return
+         */
         public Date getDueDate() {
             return dueDate;
         }
 
+        /**
+         * @return
+         */
         public String getId() {
             return id;
         }
 
+        /**
+         * @param id
+         */
         public void setId(String id) {
             this.id = id;
         }
 
+        /**
+         * @param category
+         */
         public void setCategory(String category) {
             this.category = category;
         }
 
+        /**
+         * @return
+         */
         public String getCategory() {
             return category;
         }
 
+        /**
+         * @param obj
+         * @return
+         */
         @Override
         public boolean equals(@Nullable Object obj) {
             final PlannerContent.PlannerItem other = (PlannerContent.PlannerItem) obj;
@@ -139,6 +192,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemCategoryComparator implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -146,6 +202,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemNameComparator implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -153,6 +212,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemDescriptionComparator implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -160,6 +222,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemCompletedComparator implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -169,6 +234,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemDateComparator implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -176,6 +244,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemCategoryComparatorReverse implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -183,6 +254,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemNameComparatorReverse implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -190,6 +264,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemDescriptionComparatorReverse implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -197,6 +274,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemCompletedComparatorReverse implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {
@@ -206,6 +286,9 @@ public class PlannerContent {
         }
     }
 
+    /**
+     *
+     */
     public static class PlannerItemDateComparatorReverse implements Comparator<PlannerItem> {
         @Override
         public int compare(PlannerItem o1, PlannerItem o2) {

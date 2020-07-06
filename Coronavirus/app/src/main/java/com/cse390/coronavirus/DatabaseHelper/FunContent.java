@@ -1,11 +1,10 @@
 package com.cse390.coronavirus.DatabaseHelper;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,22 +28,36 @@ public class FunContent {
      */
     public static final Map<String, FunItem> ITEM_MAP = new HashMap<>();
 
+    /**
+     * @param item
+     */
     public static void addItem(FunItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
+    /**
+     * @param index
+     */
     public static void removeItem(int index) {
         FunItem item = ITEMS.get(index);
         ITEMS.remove(index);
     }
 
+    /**
+     * @param index
+     * @return
+     */
     public static FunContent.FunItem getItem(int index){
         FunContent.FunItem item = ITEMS.get(index);
         return item;
     }
 
 
+    /**
+     * @param position
+     * @return
+     */
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
@@ -65,8 +78,18 @@ public class FunContent {
         private String id;
 
 
+        /**
+         *
+         */
         public FunItem(){}
 
+        /**
+         * @param category
+         * @param name
+         * @param description
+         * @param completed
+         * @param id
+         */
         public FunItem(String category, String name,String description, boolean completed, String id){
             this.category = category;
             this.name = name;
@@ -76,46 +99,80 @@ public class FunContent {
             this.id = id;
         }
 
+        /**
+         * @return
+         */
         public String getCategory() {
             return category;
         }
 
+        /**
+         * @param category
+         */
         public void setCategory(String category) {
             this.category = category;
         }
 
+        /**
+         * @return
+         */
         public String getDescription() {
             return description;
         }
 
+        /**
+         * @param description
+         */
         public void setDescription(String description) {
             this.description = description;
         }
 
+        /**
+         * @return
+         */
         public boolean isCompleted() {
             return completed;
         }
 
+        /**
+         * @param completed
+         */
         public void setCompleted(boolean completed) {
             this.completed = completed;
         }
 
+        /**
+         * @return
+         */
         public String getId() {
             return id;
         }
 
+        /**
+         * @param id
+         */
         public void setId(String id) {
             this.id = id;
         }
 
+        /**
+         * @param name
+         */
         public void setName(String name) {
             this.name = name;
         }
 
+        /**
+         * @return
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         * @param obj
+         * @return
+         */
         @Override
         public boolean equals(@Nullable Object obj) {
             final FunContent.FunItem other = (FunContent.FunItem) obj;
@@ -129,6 +186,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemCategoryComparator implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -136,6 +196,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemNameComparator implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -143,6 +206,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemDescriptionComparator implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -150,6 +216,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemCompletedComparator implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -159,6 +228,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemCategoryComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -166,6 +238,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemNameComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -173,6 +248,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemDescriptionComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
@@ -180,6 +258,9 @@ public class FunContent {
         }
     }
 
+    /**
+     *
+     */
     public static class FunItemCompletedComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
         public int compare(FunContent.FunItem o1, FunContent.FunItem o2) {
