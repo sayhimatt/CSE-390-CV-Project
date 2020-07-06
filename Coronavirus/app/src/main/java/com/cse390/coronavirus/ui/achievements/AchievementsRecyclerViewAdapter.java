@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cse390.coronavirus.DatabaseHelper.AchievementContent;
@@ -40,6 +41,16 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
 
         holder.mIdView.setText(String.valueOf(position+1));
         holder.mContentView.setText(mValues.get(position).getName());
+
+        // Check Achievement
+        String achievementName = mValues.get(position).getName();
+        switch (achievementName){
+            case "Expert":
+                holder.mAchievementImageView.setImageResource(R.drawable.base_award);
+                break;
+            case "Master" :
+                break;
+        }
     }
 
     @Override
@@ -51,6 +62,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView mAchievementImageView;
 
 
         public ViewHolder(View view) {
@@ -58,6 +70,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.category_tv);
             mContentView = (TextView) view.findViewById(R.id.name_tv);
+            mAchievementImageView = view.findViewById(R.id.achievement_image);
         }
 
         @Override
