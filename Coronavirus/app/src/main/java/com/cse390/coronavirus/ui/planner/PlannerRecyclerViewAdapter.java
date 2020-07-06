@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -72,6 +74,37 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
                 return true;
             }
         });
+
+        holder.completedCheckB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        holder.hideDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.showDetails){
+                    holder.hideDescriptionButton.setText("Show\n Details");
+                    holder.descriptionView.setVisibility(View.INVISIBLE);
+                    holder.showDetails = false;
+                }else{
+                    holder.hideDescriptionButton.setText("Hide\n Details");
+                    holder.descriptionView.setVisibility(View.VISIBLE);
+                    holder.showDetails = true;
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -86,6 +119,10 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         public final TextView descriptionView;
         public final TextView dateView;
         public final CheckBox completedCheckB;
+        public final Button hideDescriptionButton;
+        public final Button editButton;
+        public boolean showDetails;
+
         public PlannerItem mItem;
 
         public ViewHolder(View view) {
@@ -96,7 +133,9 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             descriptionView = view.findViewById(R.id.desc_tv);
             dateView = view.findViewById(R.id.due_date_tv);
             completedCheckB = view.findViewById(R.id.completed_cb);
-
+            hideDescriptionButton = view.findViewById(R.id.hide_description_button_planner);
+            editButton = view.findViewById(R.id.edit_item_button_planner);
+            showDetails = true;
         }
 
         @Override

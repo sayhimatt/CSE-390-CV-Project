@@ -74,6 +74,9 @@ public class PlanDialog extends DialogFragment {
                     String desc = planDescET.getText().toString();
                     MainActivity activity = (MainActivity) getActivity();
                     Date userDate = activity.getDateSet();
+                    if (userDate == null){
+                        userDate = new Date();
+                    }
                     PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, category, desc, false, userDate, itemToEditID);
                     planDialogListener = (PlanDialogListener) getTargetFragment();
                     planDialogListener.editItem(itemToEditID, pi, positionToEdit);
@@ -88,6 +91,9 @@ public class PlanDialog extends DialogFragment {
                     String desc = planDescET.getText().toString();
                     MainActivity activity = (MainActivity) getActivity();
                     Date userDate = activity.getDateSet();
+                    if (userDate == null){
+                        userDate = new Date();
+                    }
                     PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, category, desc, false, userDate, "1");
                     planDialogListener.addPlanToList(pi);
                 }

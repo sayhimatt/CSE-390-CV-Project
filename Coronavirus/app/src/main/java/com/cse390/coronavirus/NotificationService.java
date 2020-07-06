@@ -56,7 +56,7 @@ public class NotificationService extends Service {
         timer = new Timer() ;
         initializeTimerTask() ;
         // 36000000
-        timer.schedule( timerTask , 36000000 , Your_X_SECS * 1000 ) ;
+        timer.schedule( timerTask , 3600000  , Your_X_SECS * 1000 ) ;
     }
     public void stopTimerTask () {
         if ( timer != null ) {
