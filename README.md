@@ -37,6 +37,22 @@ password: grading<br>
 ### Refer to the image below for reference
 ![Firebase References](/readme_images/database_proof.png)
 
+### A Java doc has been generated inside the doc folder!
+
+
+### All images displayed in our application
+![Achievements](/readme_images/achievements.png)
+![Firebase References](/readme_images/fun activities.png)
+![Firebase References](/readme_images/fun dialog.png)
+![Firebase References](/readme_images/gen fun dialog.png)
+![Firebase References](/readme_images/menu item clicked.png)
+![Firebase References](/readme_images/notification.jpeg)
+![Firebase References](/readme_images/plan dialog.png)
+![Firebase References](/readme_images/settings.png)
+![Firebase References](/readme_images/sign in.png)
+![Firebase References](/readme_images/signed in planner.png)
+
+
 
 
 
