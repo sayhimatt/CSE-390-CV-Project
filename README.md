@@ -3,6 +3,10 @@
 
 ## Coronavirus project 
 
+*important note*
+Please use this account to test our application at first we've set it up so you can familiarize yourself with it:
+username: grading@gmail.com
+password: grading
 
 ### We have at least 3 activities
 ### Here are the main ones:
@@ -55,4 +59,8 @@ Fun Achievement Icon 2:
 <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br>
 Fun Achievement Icon 3:
 <a href="https://www.flaticon.com/free-icon/recommended_3163306" title="photo3idea_studio">photo3idea_studio</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br> 
+
+
+
+#Thank you :)
 
