@@ -6,12 +6,30 @@
 
 ### We have at least 3 activities
 ### Here are the main ones:
- <ul>
-  <li>Planner view</li>
-  <li>Fun Activities view</li>
-  <li>Achievements view</li>
+<ul>
+  <li>Planner Activity</li>
+  <li>Fun Activity</li>
+  <li>Achievements Activity</li>
 </ul> 
 
+### We have multiple DialogFragments
+### Our primary DialogFragments are:
+<ul>
+ <li>Add Fun Dialog</li>
+  <li>Add Plan Dialog</li>
+  <li>Generate Fun Dialog (Questionnaire)</li>
+</ul> 
+
+### We have multiple Recycler Views
+### Our primary Recycler Views are:
+<ul>
+  <li>Planner List</li>
+  <li>Fun List</li>
+  <li>Achievements List</li>
+</ul> 
+
+### Our database (Firebase) takes in many attributes
+### Refer to the image below for reference
 
 
 
