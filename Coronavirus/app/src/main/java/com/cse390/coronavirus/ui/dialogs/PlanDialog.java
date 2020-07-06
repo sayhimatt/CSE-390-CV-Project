@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class PlanDialog extends DialogFragment {
     private TextView titleDialog;
     private String itemToEditID;
     private int positionToEdit;
+    private boolean checked;
 
     @NonNull
     @Override
@@ -47,6 +49,7 @@ public class PlanDialog extends DialogFragment {
         planSubjectET = view.findViewById(R.id.plan_subject_et);
         planDescET = view.findViewById(R.id.description_et);
         titleDialog = view.findViewById(R.id.add_item_header_tv);
+
 
 
         Button dateB = view.findViewById(R.id.date_pick_b);
@@ -77,7 +80,7 @@ public class PlanDialog extends DialogFragment {
                     if (userDate == null){
                         userDate = new Date();
                     }
-                    PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, category, desc, false, userDate, itemToEditID);
+                    PlannerContent.PlannerItem pi = new PlannerContent.PlannerItem(name, category, desc, checked, userDate, itemToEditID);
                     planDialogListener = (PlanDialogListener) getTargetFragment();
                     planDialogListener.editItem(itemToEditID, pi, positionToEdit);
                 }
@@ -109,10 +112,11 @@ public class PlanDialog extends DialogFragment {
         return builder.create();
     }
 
-    public void givingDetails(String id, int position){
+    public void givingDetails(String id, int position, boolean checked){
         isDetails = true;
         this.itemToEditID = id;
         this.positionToEdit = position;
+        this.checked = checked;
     }
     public void setDetails(int pos, String name, String subject, String description){
         this.pos = pos;

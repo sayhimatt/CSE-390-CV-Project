@@ -49,6 +49,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
                 holder.mAchievementImageView.setImageResource(R.drawable.base_award);
                 break;
             case "Master" :
+                holder.mAchievementImageView.setImageResource(R.drawable.high_award);
                 break;
         }
     }

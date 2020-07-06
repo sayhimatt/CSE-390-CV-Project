@@ -87,7 +87,8 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
                 String id = PlannerContent.ITEMS.get(pos).getId();
                 PlanDialog planDialog = new PlanDialog();
                 planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString(), holder.descriptionView.getText().toString());
-                planDialog.givingDetails(id, pos);
+                boolean checked = holder.completedCheckB.isChecked();
+                planDialog.givingDetails(id, pos, checked);
                 planDialog.setTargetFragment(plannerFragment, 100);
                 planDialog.show( plannerFragment.getParentFragmentManager(), "Edit Plan Dialog");
                 return true;
@@ -113,7 +114,8 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
                 String id = PlannerContent.ITEMS.get(pos).getId();
                 PlanDialog planDialog = new PlanDialog();
                 planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString(), holder.descriptionView.getText().toString());
-                planDialog.givingDetails(id, pos);
+                boolean checked = holder.completedCheckB.isChecked();
+                planDialog.givingDetails(id, pos, checked);
                 planDialog.setTargetFragment(plannerFragment, 100);
                 planDialog.show( plannerFragment.getParentFragmentManager(), "Edit Plan Dialog");
             }

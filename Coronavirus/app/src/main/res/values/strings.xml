@@ -23,6 +23,7 @@
     <string name="default_hide_description">Hide\nDetails</string>
     <string name="default_show_description">Show\nDetails</string>
     <string name="sort_your_items">Sort Your Items!</string>
+    <string name="edit_fun_activity">Edit Fun Activity</string>
     <string-array name="item_sort_order_array">
         <item>Ascending</item>
         <item>Descending</item>

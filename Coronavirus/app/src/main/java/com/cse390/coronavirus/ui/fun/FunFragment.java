@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
+import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
@@ -87,7 +88,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new FunRecyclerViewAdapter(mValues, getContext()));
+            recyclerView.setAdapter(new FunRecyclerViewAdapter(mValues, getContext(), FunFragment.this ));
 
             FloatingActionButton addB = view.findViewById(R.id.add_fun_fab);
             addB.setOnClickListener(new View.OnClickListener() {
@@ -140,9 +141,19 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     public void addFunToList(FunContent.FunItem fi) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");
         String id = ref.push().getKey();
+        System.out.println(id);
         fi.setId(id);
         ref.child(id).setValue(fi);
         FunContent.addItem(fi);
+        recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void editItem(String id, FunContent.FunItem fi, int position) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");
+        DatabaseReference itemReference = ref.child(id);
+        itemReference.setValue(fi);
+        FunContent.ITEMS.set(position, fi);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
