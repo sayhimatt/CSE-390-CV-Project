@@ -25,6 +25,7 @@
     <string name="sort_your_items">Sort Your Items!</string>
     <string name="edit_fun_activity">Edit Fun Activity</string>
     <string name="settings_s">Settings</string>
+    <string name="or_s">OR</string>
     <string-array name="item_sort_order_array">
         <item>Ascending</item>
         <item>Descending</item>
