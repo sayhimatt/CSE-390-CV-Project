@@ -42,15 +42,15 @@ password: grading<br>
 
 ### All images displayed in our application
 ![Achievements](/readme_images/achievements.png)
-![Firebase References](/readme_images/fun activities.png)
-![Firebase References](/readme_images/fun dialog.png)
-![Firebase References](/readme_images/gen fun dialog.png)
-![Firebase References](/readme_images/menu item clicked.png)
+![fun_activities](/readme_images/fun_activities.png)
+![Firebase References](/readme_images/fun_dialog.png)
+![Firebase References](/readme_images/gen_fun_dialog.png)
+![Firebase References](/readme_images/menu_item_clicked.png)
 ![Firebase References](/readme_images/notification.jpeg)
-![Firebase References](/readme_images/plan dialog.png)
+![Firebase References](/readme_images/plan_dialog.png)
 ![Firebase References](/readme_images/settings.png)
-![Firebase References](/readme_images/sign in.png)
-![Firebase References](/readme_images/signed in planner.png)
+![Firebase References](/readme_images/sign_in.png)
+![Firebase References](/readme_images/signed_in_planner.png)
 
 
 
