@@ -3,10 +3,10 @@
 
 ## Coronavirus project 
 
-*important note*
-Please use this account to test our application at first we've set it up so you can familiarize yourself with it:
-username: grading@gmail.com
-password: grading
+*important note*<br>
+Please use this account to test our application at first we've set it up so you can familiarize yourself with it:<br>
+username: grading@gmail.com<br>
+password: grading<br>
 
 ### We have at least 3 activities
 ### Here are the main ones:
