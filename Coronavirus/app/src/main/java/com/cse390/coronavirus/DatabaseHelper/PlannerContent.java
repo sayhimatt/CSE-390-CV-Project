@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
+ * Helper class for for plan content
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class PlannerContent {
 
     /**
-     * An array of sample (dummy) items.
+     * An array of plan items
      */
     public static List<PlannerItem> ITEMS = new ArrayList<>();
 
     /**
-     * A map of sample (dummy) items, by ID.
+     * A map of plan items
      */
     public static final Map<String, PlannerItem> ITEM_MAP = new HashMap<>();
 
@@ -75,12 +75,13 @@ public class PlannerContent {
 
 
         /**
+         * The main creation of a plan item all plans have these details
          * @param name
          * @param category
          * @param description
          * @param completed
          * @param dueDate
-         * @param id
+         * @param id used to identify plans from one another
          */
         public PlannerItem(String name,String category,String description, boolean completed, Date dueDate, String id){
             this.name = name;
@@ -193,7 +194,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compares two plans based on category
      */
     public static class PlannerItemCategoryComparator implements Comparator<PlannerItem> {
         @Override
@@ -203,7 +204,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     *  Compares two plans based on name
      */
     public static class PlannerItemNameComparator implements Comparator<PlannerItem> {
         @Override
@@ -213,7 +214,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compares two plans based on description
      */
     public static class PlannerItemDescriptionComparator implements Comparator<PlannerItem> {
         @Override
@@ -223,7 +224,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compares two plans based on completion
      */
     public static class PlannerItemCompletedComparator implements Comparator<PlannerItem> {
         @Override
@@ -235,7 +236,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     *  Compares two plans based on date
      */
     public static class PlannerItemDateComparator implements Comparator<PlannerItem> {
         @Override
@@ -245,7 +246,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compare two categories with an inverse
      */
     public static class PlannerItemCategoryComparatorReverse implements Comparator<PlannerItem> {
         @Override
@@ -255,7 +256,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compare two names with an inverse
      */
     public static class PlannerItemNameComparatorReverse implements Comparator<PlannerItem> {
         @Override
@@ -265,7 +266,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compare two description with an inverse
      */
     public static class PlannerItemDescriptionComparatorReverse implements Comparator<PlannerItem> {
         @Override
@@ -275,7 +276,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compares two plans based on Completion with an inverse
      */
     public static class PlannerItemCompletedComparatorReverse implements Comparator<PlannerItem> {
         @Override
@@ -287,7 +288,7 @@ public class PlannerContent {
     }
 
     /**
-     *
+     * Compares two plans based on date with an inverse
      */
     public static class PlannerItemDateComparatorReverse implements Comparator<PlannerItem> {
         @Override

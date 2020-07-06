@@ -19,7 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ * The main activity normally displayed when a user signs in or is already signed in
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private Date dateSet;
 
     /**
+     * Initializes the main view if there is a saved user signed in
+     * If not the activity transitions over to the sign up activity
      * @param savedInstanceState
      */
     @Override
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
-     *
+     * Notifies the notification service to run in the background for the user
      */
     @Override
     protected void onStop() {
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
-     *
+     * Notifies the notification service to run in the background for the user
      */
     @Override
     protected void onDestroy() {
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
+     * Inflates the custom account menu bar option (for signing out)
      * @param menu
      * @return
      */
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
+     * Listener that signs the current user out and returns them to sign in/up activity
      * @param item
      * @return
      */
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
+     * Takes in the date passed by the user by the date picker dialog and parses it through as a date it through to be used by the plan dialog
      * @param view
      * @param year
      * @param month
@@ -130,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
+     * Grabs the date set for use in the plan dialog
      * @return
      */
     public Date getDateSet() {
@@ -137,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     /**
+     * Sets the date parsed for use in the plan dialog
      * @param dateSet
      */
     public void setDateSet(Date dateSet) {

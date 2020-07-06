@@ -24,7 +24,8 @@ import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import java.util.Date;
 
 /**
- *
+ * Plan dialog allows the user to add/modify plans
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class PlanDialog extends DialogFragment {
     private String name, subject, description;
@@ -38,6 +39,8 @@ public class PlanDialog extends DialogFragment {
     private boolean checked;
 
     /**
+     * Generates the dialog and assigns click listeners for the date picker dialog button
+     * Also creates dialog options to save and cancel the current plan item
      * @param savedInstanceState
      * @return
      */
@@ -132,8 +135,9 @@ public class PlanDialog extends DialogFragment {
     }
 
     /**
-     * @param id
-     * @param position
+     * Tells the plan dialog that we're editing a selected plan
+     * @param id unique id to be referenced when saved
+     * @param position position in the list to be referenced
      * @param checked
      */
     public void givingDetails(String id, int position, boolean checked){
@@ -144,7 +148,8 @@ public class PlanDialog extends DialogFragment {
     }
 
     /**
-     * @param pos
+     * Gives details to prefill the edit texts in the dialog (if applicable)
+     * @param pos position in the list to be referenced
      * @param name
      * @param subject
      * @param description
@@ -157,6 +162,7 @@ public class PlanDialog extends DialogFragment {
     }
 
     /**
+     * Confirms that the calling fragment implements the interface
      * @param c
      */
     @Override
@@ -170,7 +176,7 @@ public class PlanDialog extends DialogFragment {
     }
 
     /**
-     *
+     *Allows the dialog to work with the database and list when saving/editing
      */
     public interface PlanDialogListener{
         void addPlanToList(PlannerContent.PlannerItem pi);

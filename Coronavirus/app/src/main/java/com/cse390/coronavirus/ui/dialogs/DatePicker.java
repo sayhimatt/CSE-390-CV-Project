@@ -11,13 +11,15 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 /**
- *
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
+ * Date picker does exactly what the name implies
  */
 public class DatePicker extends DialogFragment {
 
     /**
+     * Forms a calendar picker view with the current date as the initially selected instance
      * @param savedInstanceState
-     * @return
+     * @return Returns the newly created calendar with the current date selected
      */
     @NonNull
     @Override

@@ -32,7 +32,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
+ * The Fun Fragment displays all the fun activities for the user and allows
+ * New generation based on a questionnaire
+ * New activities through manual addition
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener, GenerateFunDialog.GenerateFunListener {
 
@@ -54,10 +57,10 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
+     *
      * @param columnCount
      * @return
      */
-    // TODO: Customize parameter initialization
     public static FunFragment newInstance(int columnCount) {
         FunFragment fragment = new FunFragment();
         Bundle args = new Bundle();
@@ -67,6 +70,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
+     * Default creation for the fragment
      * @param savedInstanceState
      */
     @Override
@@ -79,6 +83,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
+     * Inflates the recycler view and creates listeners for the floating action buttons to generate/add fun activities
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -136,7 +141,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
-     *
+     * Pulls in the current user
      */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
@@ -155,7 +160,8 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
-     * @param fi
+     *  Interface method that works with the database to add a new fun activity
+     * @param fi Fun activity to be added to the list
      */
     @Override
     public void addFunToList(FunContent.FunItem fi) {
@@ -169,9 +175,10 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
-     * @param id
-     * @param fi
-     * @param position
+     * Works with the database to modify an existing fun activity
+     * @param id Used to identify the existing activity in the database
+     * @param fi The newly modified fun activity
+     * @param position Used to identify the existing activity in the recycler view
      */
     @Override
     public void editItem(String id, FunContent.FunItem fi, int position) {
@@ -183,7 +190,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
-     *
+     * Touch recognizer that deletes based on recycler view item movement
      */
     private void initDelete(){
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -207,7 +214,8 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
-     * @param sortFields
+     * Sorts the items based on end user's settings
+     * @param sortFields the user's sorting preferences
      */
     private void sortFunItems(ArrayList<String> sortFields){
         if (sortFields.get(1).equals("ascending")){
@@ -244,7 +252,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
     /**
-     *
+     * Pulls all fun activities from the database based on the current user and assigns it to the funItems list
      */
     private void retrieveFunItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -252,6 +260,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         DatabaseReference sortFields = database.child("Users").child(currentUserID).child("FunItemsSort");
         funItems.addListenerForSingleValueEvent(new ValueEventListener() {
             /**
+             * updates the list if modifications occur
              * @param snapshot
              */
             @Override
@@ -276,6 +285,7 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
 
         sortFields.addListenerForSingleValueEvent(new ValueEventListener() {
             /**
+             * updates the list if modifications occur
              * @param snapshot
              */
             @Override
@@ -303,7 +313,8 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
 
 
     /**
-     * @param funItemsList
+     * Takes in a list of fun activities for insertion into the recycler view
+     * @param funItemsList the list of fun activities usually pulled from the database
      */
     @Override
     public void addFunItemsToList(List<FunContent.FunItem> funItemsList) {

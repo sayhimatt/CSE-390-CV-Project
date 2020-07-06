@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Helper class for achievements
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class AchievementContent {
 
@@ -15,6 +16,7 @@ public class AchievementContent {
     public static final Map<String, AchievementContent.AchievementItem> ITEM_MAP = new HashMap<>();
 
     /**
+     * Sets achievement list
      * @param items
      */
     public static void setItems(List<AchievementContent.AchievementItem> items){
@@ -22,6 +24,7 @@ public class AchievementContent {
     }
 
     /**
+     * Adds an achievement to the list
      * @param item
      */
     public static void addItem(AchievementContent.AchievementItem item) {
@@ -43,8 +46,9 @@ public class AchievementContent {
 
 
         /**
+         * Declares a new achievement item with a name and unique id
          * @param name
-         * @param id
+         * @param id used to identify achievements from one another
          */
         public AchievementItem(String name, String id){
             this.name = name;

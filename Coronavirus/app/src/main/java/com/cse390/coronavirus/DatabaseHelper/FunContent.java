@@ -11,24 +11,25 @@ import java.util.Map;
 
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
+ * Helper class for fun activities in the database
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class FunContent {
 
     /**
-     * An array of sample (dummy) items.
+     * An array of fun activities
      */
     public static final List<FunItem> ITEMS = new ArrayList<>();
 
     /**
-     * A map of sample (dummy) items, by ID.
+     * A map of fun activities
      */
     public static final Map<String, FunItem> ITEM_MAP = new HashMap<>();
 
     /**
+     * Adds a new fun activity to the list and map
      * @param item
      */
     public static void addItem(FunItem item) {
@@ -37,6 +38,7 @@ public class FunContent {
     }
 
     /**
+     * Removes a fun activity from the list
      * @param index
      */
     public static void removeItem(int index) {
@@ -45,7 +47,8 @@ public class FunContent {
     }
 
     /**
-     * @param index
+     * Returns the fun activity at the given index
+     * @param index the position of the desired fun activity
      * @return
      */
     public static FunContent.FunItem getItem(int index){
@@ -55,6 +58,8 @@ public class FunContent {
 
 
     /**
+     *  Creates details about a given fun activity
+     *  NOT USED
      * @param position
      * @return
      */
@@ -68,7 +73,7 @@ public class FunContent {
     }
 
     /**
-     * A dummy item representing a piece of content.
+     * A fun item representing the content in any fun activity
      */
     public static class FunItem {
         private String category;
@@ -84,6 +89,7 @@ public class FunContent {
         public FunItem(){}
 
         /**
+         * These variables make up a new fun activity
          * @param category
          * @param name
          * @param description
@@ -187,7 +193,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the two fun activities category values
      */
     public static class FunItemCategoryComparator implements Comparator<FunContent.FunItem> {
         @Override
@@ -197,7 +203,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the two fun activities name values
      */
     public static class FunItemNameComparator implements Comparator<FunContent.FunItem> {
         @Override
@@ -207,7 +213,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the two fun activities description values
      */
     public static class FunItemDescriptionComparator implements Comparator<FunContent.FunItem> {
         @Override
@@ -217,7 +223,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the two fun activities completion values
      */
     public static class FunItemCompletedComparator implements Comparator<FunContent.FunItem> {
         @Override
@@ -229,7 +235,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the inverse of two fun activities category values
      */
     public static class FunItemCategoryComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
@@ -239,7 +245,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the inverse of two fun activities name values
      */
     public static class FunItemNameComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
@@ -249,7 +255,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the inverse of two fun activities description values
      */
     public static class FunItemDescriptionComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override
@@ -259,7 +265,7 @@ public class FunContent {
     }
 
     /**
-     *
+     * Compares the inverse of two fun activities completion values
      */
     public static class FunItemCompletedComparatorReverse implements Comparator<FunContent.FunItem> {
         @Override

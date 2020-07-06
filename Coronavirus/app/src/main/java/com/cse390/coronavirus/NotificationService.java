@@ -22,7 +22,8 @@ import java.util.Timer ;
 import java.util.TimerTask ;
 
 /**
- *
+ * Notification service that gets set in the background to remind the user about plans due today
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class NotificationService extends Service {
 
@@ -45,6 +46,7 @@ public class NotificationService extends Service {
     }
 
     /**
+     * the start to get the timer and notifications going
      * @param intent
      * @param flags
      * @param startId
@@ -58,7 +60,7 @@ public class NotificationService extends Service {
     }
 
     /**
-     *
+     * destroys the notifications timer and schedule
      */
     @Override
     public void onDestroy () {
@@ -71,7 +73,7 @@ public class NotificationService extends Service {
     final Handler handler = new Handler() ;
 
     /**
-     *
+     * the notifications go on every hour (delay is set on that schedule)
      */
     public void startTimer () {
         timer = new Timer() ;
@@ -81,7 +83,7 @@ public class NotificationService extends Service {
     }
 
     /**
-     *
+     * destroys the timer task
      */
     public void stopTimerTask () {
         if ( timer != null ) {
@@ -91,7 +93,7 @@ public class NotificationService extends Service {
     }
 
     /**
-     *
+     * initializes the timer task to alert the user
      */
     public void initializeTimerTask () {
         timerTask = new TimerTask() {
@@ -107,6 +109,8 @@ public class NotificationService extends Service {
     }
 
     /**
+     * Creates the notification to tell the end user based on the number of plans that have been assigned on the current date
+     * Then informs the user in a push notification as long as the count is 1 or more
      * @param numberOfItemsDueToday
      */
     private void createNotification (long numberOfItemsDueToday) {
@@ -150,7 +154,8 @@ public class NotificationService extends Service {
     }
 
     /**
-     *
+     *  Pulls the signed in user due items and checks their dates in correlation with the current date
+     *  If they match the current date it is added to the count and at the end createNotification is called with that count
      */
     private void alertUserOfDueItems(){
         mAuth = FirebaseAuth.getInstance();
@@ -171,6 +176,7 @@ public class NotificationService extends Service {
 
             plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
                 /**
+                 * Goes through the list of plans and calls createNotification on any change
                  * @param snapshot
                  */
                 @Override

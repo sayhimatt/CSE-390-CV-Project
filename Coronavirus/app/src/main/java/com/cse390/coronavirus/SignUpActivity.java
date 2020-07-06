@@ -19,7 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
- *
+ * The sign up activity is displayed when there is no current user or the current user chose to sign out
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class SignUpActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button loginButton;
 
     /**
+     * Creates the view and initializes Firebase's Auth for user generation/login
      * @param savedInstanceState
      */
     @Override
@@ -47,7 +49,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     *  Pulls the user's sign in and verifies username and password are not empty
+     *  If any issues come up from the creation of the user it informs the user registration failed
+     *  Login is similar but says the sign in failed instead
+     *  Transitions to the main activity upon a successful login/sign up with a message confirming completion 
      */
     private void initSignUpButton(){
         signUpButton = findViewById(R.id.signup_btn);

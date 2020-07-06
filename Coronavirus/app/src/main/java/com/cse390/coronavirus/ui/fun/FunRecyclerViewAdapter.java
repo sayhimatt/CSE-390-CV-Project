@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 /**
- *
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerViewAdapter.ViewHolder> {
 
@@ -36,6 +36,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     private String currentUserID;
 
     /**
+     * Initializes a new recycler view adapter given the items, context, and current fun fragment
      * @param items
      * @param c
      * @param funFragment
@@ -47,7 +48,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     }
 
     /**
-     *
+     * Pulls in the current user of the fragment
      */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
@@ -66,6 +67,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     }
 
     /**
+     * Inflates the recycler view's row layout
      * @param parent
      * @param viewType
      * @return
@@ -80,8 +82,9 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
 
 
     /**
-     * @param holder
-     * @param position
+     * Binds date and click listeners for each fun row item and fills in additional data if the user is editing
+     * @param holder the parent view for the row
+     * @param position the row's position in the recycler view
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -162,7 +165,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     }
 
     /**
-     * @return
+     * @return the total number of fun activities in the recycler view
      */
     @Override
     public int getItemCount() {
@@ -170,7 +173,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     }
 
     /**
-     *
+     * Declares what makes up each row and assigns variables for later modifications in values
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
@@ -184,7 +187,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         public boolean showDetails;
 
         /**
-         * @param view
+         * @param view generates the parent view for each view holder and assigns the labels for the views
          */
         public ViewHolder(View view) {
             super(view);
@@ -199,7 +202,7 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         }
 
         /**
-         * @return
+         * @return Formatted string of the fun activity's name
          */
         @Override
         @NonNull

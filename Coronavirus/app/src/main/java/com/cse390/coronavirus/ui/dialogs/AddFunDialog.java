@@ -21,7 +21,8 @@ import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.ui.fun.FunFragment;
 
 /**
- *
+ * A dialog that allows the user to manually enter a fun activity and/or edit an existing one
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class AddFunDialog extends DialogFragment{
     private EditText funCategory, funName, funDescription;
@@ -34,8 +35,9 @@ public class AddFunDialog extends DialogFragment{
     private TextView titleDialog;
 
     /**
+     *  Generates the dialog and assigns pre-existing data based on the action that is calling the dialog (if it is being edited)
      * @param savedInstanceState
-     * @return
+     * @return Returns the dialog with the option to add or save the edits (based on the call)
      */
     @NonNull
     @Override
@@ -95,7 +97,8 @@ public class AddFunDialog extends DialogFragment{
     }
 
     /**
-     * @param pos
+     * Sets the pre-existing details for the edits to be made if applicable
+     * @param pos Position in the list of fun activities
      * @param category
      * @param name
      * @param desc
@@ -113,6 +116,7 @@ public class AddFunDialog extends DialogFragment{
     }
 
     /**
+     * Checks to make sure the calling fragment implements the listener so it works properly
      * @param c
      */
     @Override
@@ -126,7 +130,7 @@ public class AddFunDialog extends DialogFragment{
     }
 
     /**
-     *
+     * Works as an intermediary between the list and the dialog fragment
      */
     public interface FunDialogListener{
         void addFunToList(FunContent.FunItem fi);

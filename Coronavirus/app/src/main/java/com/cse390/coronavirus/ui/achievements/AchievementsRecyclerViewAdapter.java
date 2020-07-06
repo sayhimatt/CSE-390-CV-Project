@@ -16,14 +16,16 @@ import com.cse390.coronavirus.R;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
- * TODO: Replace the implementation with code for your data type.
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
+ * Recycler View Adapter to help display the user's achievements
+ *
  */
 public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<AchievementsRecyclerViewAdapter.ViewHolder> {
 
     private final List<AchievementContent.AchievementItem> mValues;
 
     /**
+     * Constructor to pass through any achievements to display
      * @param items
      */
     public AchievementsRecyclerViewAdapter(List<AchievementContent.AchievementItem> items) {
@@ -31,6 +33,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
     }
 
     /**
+     * Inflates the layout for each row
      * @param parent
      * @param viewType
      * @return
@@ -45,8 +48,10 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
     }
 
     /**
-     * @param holder
-     * @param position
+     * Assigns data to the inflated view in the list
+     * Checks to assign the right achievement icon based on the name
+     * @param holder the parent view holder for each row item
+     * @param position position in the recycler view list
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -67,7 +72,8 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
     }
 
     /**
-     * @return
+     *
+     * @return Returns the number of rows in the list
      */
     @Override
     public int getItemCount() {
@@ -85,6 +91,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
 
 
         /**
+         * Constructor that gives paths to the displayable views for use in the parent view holder
          * @param view
          */
         public ViewHolder(View view) {
@@ -96,7 +103,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
         }
 
         /**
-         * @return
+         * @return Prints the contents of the achievement name
          */
         @Override
         @NonNull

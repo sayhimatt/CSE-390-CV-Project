@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Dialog that lets the user make new fun activities through questions
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
+ *
  *
  */
 public class GenerateFunDialog extends DialogFragment {
@@ -46,6 +49,8 @@ public class GenerateFunDialog extends DialogFragment {
     private List<FunContent.FunItem> generatedItems = new ArrayList<>();
 
     /**
+     *  Main creation of the dialog
+     *  View persists until the final question
      * @param savedInstanceState
      * @return
      */
@@ -103,6 +108,7 @@ public class GenerateFunDialog extends DialogFragment {
     }
 
     /**
+     * Inserts any applicable fun activities into the list based on the user's choices
      * @param activitiesListIndex
      */
     private void getItems(int activitiesListIndex){
@@ -136,6 +142,7 @@ public class GenerateFunDialog extends DialogFragment {
     }
 
     /**
+     * Sets up the follow up question for the user to decide
      * @param questionIndex
      */
     private void setQuestion(int questionIndex){
@@ -145,6 +152,7 @@ public class GenerateFunDialog extends DialogFragment {
     }
 
     /**
+     * Verifies the calling fragment can actually use this dialog properly
      * @param c
      */
     @Override
@@ -158,7 +166,7 @@ public class GenerateFunDialog extends DialogFragment {
     }
 
     /**
-     *
+     * Works with the fun activities list between fragments
      */
     public interface GenerateFunListener{
         void addFunItemsToList(List<FunContent.FunItem> funItemsList);

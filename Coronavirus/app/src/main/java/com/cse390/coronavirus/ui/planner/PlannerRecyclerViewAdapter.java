@@ -26,7 +26,8 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- *
+ * Adapts the list data to be displayed for the user
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecyclerViewAdapter.ViewHolder> {
     private final List<PlannerContent.PlannerItem> mValues;
@@ -37,6 +38,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     private String currentUserID;
 
     /**
+     * Initializes a new recycler view adapter based on plans, the current plan fragment, and the current context
      * @param items
      * @param plannerFragment
      * @param context
@@ -48,7 +50,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     }
 
     /**
-     *
+     * Pulls the current user id for later use with the database
      */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
@@ -67,6 +69,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     }
 
     /**
+     * Inflates the layout for each plan item in the recycler view
      * @param parent
      * @param viewType
      * @return
@@ -80,8 +83,9 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     }
 
     /**
-     * @param holder
-     * @param position
+     * Assigns data for each given row of the recycler and sets listeners accordingly for modifying/displaying the row's information
+     * @param holder the parent view for the recycler view
+     * @param position the position in the recycler view list
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -174,7 +178,8 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     }
 
     /**
-     * @return
+     *
+     * @return the amount of rows in the recycler view
      */
     @Override
     public int getItemCount() {
@@ -182,7 +187,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     }
 
     /**
-     *
+     * Assigns labels in each row for future data setting
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
@@ -198,6 +203,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         public PlannerItem mItem;
 
         /**
+         * Assigns the labels their respective views based on id
          * @param view
          */
         public ViewHolder(View view) {
@@ -214,7 +220,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         }
 
         /**
-         * @return
+         * @return the plans current subject is printed.
          */
         @Override
         @NonNull

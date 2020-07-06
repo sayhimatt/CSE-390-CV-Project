@@ -31,13 +31,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ * Planner fragment is the overall view for plans that the user has set
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogListener {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private static RecyclerView planList;
     private static List<PlannerContent.PlannerItem> mValues = PlannerContent.ITEMS;
@@ -53,6 +52,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
+     * Not in use
      * @param columnCount
      * @return
      */
@@ -66,6 +66,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
+     * Creates the fragment must be called
      * @param savedInstanceState
      */
     @Override
@@ -78,6 +79,8 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
+     * Inflate the layout and instantiates the recycler view list
+     * Assigns click listeners for the floating action buttons
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -118,6 +121,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
+     *  Adds a plan to the database and list and finally updating the recycler view to visibly show the change
      * @param pi
      */
     public void addPlanToList(PlannerContent.PlannerItem pi) {
@@ -131,9 +135,10 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
-     * @param id
-     * @param pi
-     * @param position
+     *  Edits an existing plan to the database and list and finally updating the recycler view to visibly show the change
+     * @param id unique id of the plan
+     * @param pi the new plan to be inserted
+     * @param position the position in the list of the plan
      */
     @Override
     public void editItem(String id, PlannerContent.PlannerItem pi, int position) {
@@ -145,7 +150,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
-     *
+     * Grabs the current user for use in pulling firebase data
      */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
@@ -164,7 +169,8 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
-     *
+     * Assigns touch listeners to delete existing plans through swiping
+     * Alerts the recycler view and database when appropriate
      */
     private void initDelete() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -190,7 +196,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
-     *
+     * Creates the dialog for adding a new dialog
      */
     private void initDialogFab() {
         // Add stuff to the object here!
@@ -203,7 +209,8 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
 
 
     /**
-     * @param sortFields
+     * Pulls in the sort fields preferences and adjusts the list accordingly
+     * @param sortFields the list of preferences setup by the user in the settings
      */
     private void sortPlannerItems(ArrayList<String> sortFields){
         // Get the sortCriteria
@@ -247,7 +254,8 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
     /**
-     *
+     * Retrieves the current list of plans and sort preferences set by the current user
+     * A
      */
     private void retrievePlannerItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -255,6 +263,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         DatabaseReference sortFields = database.child("Users").child(currentUserID).child("PlannerItemsSort");
         plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
             /**
+             * Modifies the list based on any data changes detected in the database and updates the recycler view accordingly
              * @param snapshot
              */
             @Override
@@ -280,6 +289,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
 
         sortFields.addListenerForSingleValueEvent(new ValueEventListener() {
             /**
+             * Retrieves any changes to the sort preferences and adjusts accordingly
              * @param snapshot
              */
             @Override

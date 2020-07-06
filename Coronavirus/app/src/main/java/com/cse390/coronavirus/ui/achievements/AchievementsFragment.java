@@ -24,13 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 /**
- *
+ * Achievement Fragment displays what achievements user has made through their completion of plans using the app
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class AchievementsFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private FirebaseAuth mAuth;
     private String currentUserID;
@@ -43,8 +43,7 @@ public class AchievementsFragment extends Fragment {
     public AchievementsFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static AchievementsFragment newInstance(int columnCount) {
         AchievementsFragment fragment = new AchievementsFragment();
         Bundle args = new Bundle();
@@ -66,6 +65,7 @@ public class AchievementsFragment extends Fragment {
     }
 
     /**
+     * Helps bring in the recycler view to be displayed inside the fragment
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -94,6 +94,9 @@ public class AchievementsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Pulls the current user for correct and updated data pulls from Firebase
+     */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -111,7 +114,7 @@ public class AchievementsFragment extends Fragment {
     }
 
     /**
-     *
+     * Queries firebase for the list of achievements the user has and adds any to the list
      */
     private void checkOutAchievementItems(){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -135,7 +138,7 @@ public class AchievementsFragment extends Fragment {
     }
 
     /**
-     *
+     *Checks to see the count of completed plans and takes appropriate action if it meets an achievement for the user
      */
     private void checkPlanBasedAchievementItems(){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -190,7 +193,7 @@ public class AchievementsFragment extends Fragment {
 
 
     /**
-     *
+     * Not implemented not enough time
      */
     private void checkFunBasedAchievementItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();

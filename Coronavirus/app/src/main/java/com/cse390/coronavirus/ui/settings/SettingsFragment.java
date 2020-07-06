@@ -28,7 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 //import com.guidi.coronavirus.ui.fun.FunViewModel;
 
 /**
- *
+ * The Settings Fragment allows the user to adjust the sorting options graphically
+ * @author Khiem Phi (111667279) & Matthew Guidi (110794886)
  */
 public class SettingsFragment extends Fragment {
 
@@ -41,6 +42,7 @@ public class SettingsFragment extends Fragment {
     private String currentUserID;
 
     /**
+     * Generates the settings's view and assigns  listeners to display the spinners as well as saving the preferences selected
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -93,6 +95,7 @@ public class SettingsFragment extends Fragment {
             }
 
             /**
+             *
              * @param parent
              */
             @Override
@@ -124,7 +127,7 @@ public class SettingsFragment extends Fragment {
     }
 
     /**
-     *
+     * Grabs the current user for database pulling
      */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
