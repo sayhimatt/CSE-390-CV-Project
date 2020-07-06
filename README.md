@@ -2,7 +2,7 @@
 
 
 ## Coronavirus project 
-
+Khiem Phi (111667279) & Matthew Guidi (110794886)
 *important note*<br>
 Please use this account to test our application at first we've set it up so you can familiarize yourself with it:<br>
 username: grading@gmail.com<br>
