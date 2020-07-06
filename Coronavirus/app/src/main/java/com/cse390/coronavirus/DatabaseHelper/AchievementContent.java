@@ -66,7 +66,7 @@ public class AchievementContent {
         @Override
         public boolean equals(@Nullable Object obj) {
             final AchievementContent.AchievementItem other = (AchievementContent.AchievementItem) obj;
-            if (this.name.equals(other.name) && this.id.equals(other.id)
+            if (this.name.equals(other.name)
             ){
                 return true;
             }else{

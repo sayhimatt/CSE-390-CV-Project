@@ -77,6 +77,9 @@ public class AchievementsFragment extends Fragment {
                 achievementList.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             achievementList.setAdapter(new AchievementsRecyclerViewAdapter(AchievementContent.ITEMS));
+            checkOutAchievementItems();
+            checkPlanBasedAchievementItems();
+            achievementList.getAdapter().notifyDataSetChanged();
         }
         return view;
     }
@@ -97,38 +100,18 @@ public class AchievementsFragment extends Fragment {
         }
     }
 
-    private void retrieveAchievementItems() {
+    private void checkOutAchievementItems(){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
-        DatabaseReference funItems = database.child("Users").child(currentUserID).child("FunItems");
-        DatabaseReference achievementItems = database.child("Users").child(currentUserID).child("AchievementItems");
-
-
-        plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+        final DatabaseReference achievementItems = database.child("Users").child(currentUserID).child("AchievementItems");
+        achievementItems.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
-                    int countFinished = 0;
-                    PlannerContent.PlannerItem item = singleSnapShot.getValue(PlannerContent.PlannerItem.class);
-                    if(item.isCompleted()){
-                      countFinished++;
-                    }
-                    if (countFinished == 3){
-                        String id = "1";
-                        AchievementContent.AchievementItem achievementItem = new AchievementContent.AchievementItem("Good Start", id);
-                    }
-                    if (countFinished == 5){
-                        String id = "1";
-                        AchievementContent.AchievementItem achievementItem = new AchievementContent.AchievementItem("Expert", id);
-                    }
-                    if (countFinished == 10){
-                        String id = "1";
-                        AchievementContent.AchievementItem achievementItem = new AchievementContent.AchievementItem("Master", id);
-
+                    AchievementContent.AchievementItem item = singleSnapShot.getValue(AchievementContent.AchievementItem.class);
+                    if(!AchievementContent.ITEMS.contains(item)){
+                        AchievementContent.addItem(item);
                     }
                 }
-                achievementList.getAdapter().notifyDataSetChanged();
-
             }
 
             @Override
@@ -136,6 +119,64 @@ public class AchievementsFragment extends Fragment {
 
             }
         });
+    }
+
+    private void checkPlanBasedAchievementItems(){
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
+        final DatabaseReference achievementItems = database.child("Users").child(currentUserID).child("AchievementItems");
+
+        plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int countFinished = 0;
+                for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
+
+                    PlannerContent.PlannerItem item = singleSnapShot.getValue(PlannerContent.PlannerItem.class);
+                    if(item.isCompleted()){
+                        countFinished++;
+                    }
+                    System.out.println(countFinished);
+                    if (countFinished == 3){
+                        String id = achievementItems.push().getKey();
+                        AchievementContent.AchievementItem achievementItem = new AchievementContent.AchievementItem("Good Start", id);
+                        if(!AchievementContent.ITEMS.contains(achievementItem)){
+                            achievementItems.child(id).setValue(achievementItem);
+                            AchievementContent.addItem(achievementItem);
+                        }
+                    }
+                    if (countFinished == 5){
+                        String id = achievementItems.push().getKey();
+                        AchievementContent.AchievementItem achievementItem = new AchievementContent.AchievementItem("Expert", id);
+                        if(!AchievementContent.ITEMS.contains(achievementItem)){
+                            achievementItems.child(id).setValue(achievementItem);
+                            AchievementContent.addItem(achievementItem);
+                        }
+                    }
+                    if (countFinished == 10){
+                        String id = achievementItems.push().getKey();
+                        AchievementContent.AchievementItem achievementItem = new AchievementContent.AchievementItem("Master", id);
+                        if(!AchievementContent.ITEMS.contains(achievementItem)){
+                            achievementItems.child(id).setValue(achievementItem);
+                            AchievementContent.addItem(achievementItem);
+                        }
+                    }
+                }
+                achievementList.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    private void checkFunBasedAchievementItems() {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference funItems = database.child("Users").child(currentUserID).child("FunItems");
+        final DatabaseReference achievementItems = database.child("Users").child(currentUserID).child("AchievementItems");
 
         funItems.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

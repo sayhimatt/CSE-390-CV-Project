@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,13 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
                         holder.mCategoryView.getText().toString(), holder.mNameView.getText().toString(),holder.mDescView.getText().toString());
                 funDialog.show(((FragmentActivity)c).getSupportFragmentManager(), "Edit Plan Dialog");
                 return false;
+            }
+        });
+
+        holder.completedCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
             }
         });
     }

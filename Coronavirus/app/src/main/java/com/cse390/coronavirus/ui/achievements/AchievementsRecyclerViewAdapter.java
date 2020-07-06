@@ -38,7 +38,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        holder.mIdView.setText(String.valueOf(position));
+        holder.mIdView.setText(String.valueOf(position+1));
         holder.mContentView.setText(mValues.get(position).getName());
     }
 
