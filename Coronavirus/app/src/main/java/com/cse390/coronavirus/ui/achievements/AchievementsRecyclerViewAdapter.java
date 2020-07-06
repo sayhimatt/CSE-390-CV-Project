@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cse390.coronavirus.DatabaseHelper.AchievementContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.dummy.DummyContent.DummyItem;
 
@@ -19,9 +20,9 @@ import java.util.List;
  */
 public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<AchievementsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<AchievementContent.AchievementItem> mValues;
 
-    public AchievementsRecyclerViewAdapter(List<DummyItem> items) {
+    public AchievementsRecyclerViewAdapter(List<AchievementContent.AchievementItem> items) {
         mValues = items;
     }
 
@@ -36,9 +37,9 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+
+        holder.mIdView.setText(String.valueOf(position));
+        holder.mContentView.setText(mValues.get(position).getName());
     }
 
     @Override
@@ -50,7 +51,7 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+
 
         public ViewHolder(View view) {
             super(view);

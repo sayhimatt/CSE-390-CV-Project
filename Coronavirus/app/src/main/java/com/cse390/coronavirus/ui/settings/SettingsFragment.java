@@ -63,6 +63,7 @@ public class SettingsFragment extends Fragment {
         sortCriteriaSpinner.setAdapter(criteriaAdapterPlanner);
         sortOrderSpinner.setAdapter(orderAdapter);
         sortListSpinner.setAdapter(sortListAdapter);
+        
 
         sortListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

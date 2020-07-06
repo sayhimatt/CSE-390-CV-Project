@@ -19,6 +19,9 @@ import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent.PlannerItem;
 import com.cse390.coronavirus.ui.dialogs.PlanDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.text.SimpleDateFormat;
@@ -30,10 +33,29 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     private static final String DATE_FORMAT = "EEE, d MMM yyyy";
     private PlannerFragment plannerFragment;
     private Context c;
+    private FirebaseAuth mAuth;
+    private String currentUserID;
+
     public PlannerRecyclerViewAdapter(List<PlannerContent.PlannerItem> items, PlannerFragment plannerFragment, Context context){
         mValues = items;
         this.plannerFragment = plannerFragment;
         this.c = context;
+    }
+
+    private void initAuth() {
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        });
+        try {
+            currentUserID = mAuth.getCurrentUser().getUid();
+
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
@@ -61,7 +83,7 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             dueTime
         );
         final int pos = position;
-
+        initAuth();
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -75,17 +97,28 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             }
         });
 
+        holder.completedCheckB.setChecked(PlannerContent.ITEMS.get(pos).isCompleted());
+
         holder.completedCheckB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                   String id = PlannerContent.ITEMS.get(pos).getId();
+                   DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                   DatabaseReference plannerItemsCompleted = database.child("Users").child(currentUserID).child("PlannerItems").child(id).child("completed");
+                   PlannerContent.ITEMS.get(pos).setCompleted(isChecked);
+                   plannerItemsCompleted.setValue(isChecked);
             }
         });
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String id = PlannerContent.ITEMS.get(pos).getId();
+                PlanDialog planDialog = new PlanDialog();
+                planDialog.setDetails(pos, holder.categoryView.getText().toString(), holder.subjectView.getText().toString(), holder.descriptionView.getText().toString());
+                planDialog.givingDetails(id, pos);
+                planDialog.setTargetFragment(plannerFragment, 100);
+                planDialog.show( plannerFragment.getParentFragmentManager(), "Edit Plan Dialog");
             }
         });
 

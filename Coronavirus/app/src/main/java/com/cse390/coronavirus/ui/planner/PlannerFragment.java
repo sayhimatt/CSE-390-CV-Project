@@ -87,6 +87,7 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
             planList.setAdapter(new PlannerRecyclerViewAdapter(mValues,plannerFragment, getContext()));
 
             FloatingActionButton addB = view.findViewById(R.id.add_planner_fab);
+
             addB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -166,6 +167,8 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         planDialog.show(fm, "Add Plan Dialog");
 
     }
+
+
 
     private void sortPlannerItems(ArrayList<String> sortFields){
         // Get the sortCriteria
