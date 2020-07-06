@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cse390.coronavirus.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,6 +92,9 @@ public class SettingsFragment extends Fragment {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child(sortList);
                 ref.child("sortCriteria").setValue(sortCriteria);
                 ref.child("sortOrder").setValue(sortOrder);
+                Toast toasty = Toast.makeText(getContext(),"Sort Settings Saved", Toast.LENGTH_SHORT);
+                toasty.setGravity(Gravity.CENTER, 0,0);
+                toasty.show();
             }
         });
 
