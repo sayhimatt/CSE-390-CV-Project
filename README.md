@@ -10,6 +10,7 @@
   <li>Planner Activity</li>
   <li>Fun Activity</li>
   <li>Achievements Activity</li>
+  <li>Sign up Activity</li>
 </ul> 
 
 ### We have multiple DialogFragments
