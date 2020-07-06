@@ -21,14 +21,15 @@ import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.MainActivity;
 import com.cse390.coronavirus.R;
 import com.cse390.coronavirus.SignUpActivity;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.fun.FunFragment;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ *
+ */
 public class GenerateFunDialog extends DialogFragment {
     private RadioGroup answersRG;
     private TextView questionTV;
@@ -44,6 +45,10 @@ public class GenerateFunDialog extends DialogFragment {
     private int optionsSelected;
     private List<FunContent.FunItem> generatedItems = new ArrayList<>();
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -97,6 +102,9 @@ public class GenerateFunDialog extends DialogFragment {
         return builder.create();
     }
 
+    /**
+     * @param activitiesListIndex
+     */
     private void getItems(int activitiesListIndex){
 
         String category = categoriesGenerated[activitiesListIndex];
@@ -127,12 +135,18 @@ public class GenerateFunDialog extends DialogFragment {
         }
     }
 
+    /**
+     * @param questionIndex
+     */
     private void setQuestion(int questionIndex){
         if (questionIndex <= 2){
             questionTV.setText(questions[questionIndex]);
         }
     }
 
+    /**
+     * @param c
+     */
     @Override
     public void onAttach(Context c){
         super.onAttach(c);
@@ -142,6 +156,10 @@ public class GenerateFunDialog extends DialogFragment {
             throw new ClassCastException(getContext().toString() + " does not implement FunDialogListener");
         }
     }
+
+    /**
+     *
+     */
     public interface GenerateFunListener{
         void addFunItemsToList(List<FunContent.FunItem> funItemsList);
     }

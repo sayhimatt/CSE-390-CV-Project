@@ -15,16 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cse390.coronavirus.DatabaseHelper.AchievementContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class AchievementsFragment extends Fragment {
 
     // TODO: Customize parameter argument names
@@ -52,6 +53,9 @@ public class AchievementsFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,12 @@ public class AchievementsFragment extends Fragment {
         }
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,6 +110,9 @@ public class AchievementsFragment extends Fragment {
         }
     }
 
+    /**
+     *
+     */
     private void checkOutAchievementItems(){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference achievementItems = database.child("Users").child(currentUserID).child("AchievementItems");
@@ -121,6 +134,9 @@ public class AchievementsFragment extends Fragment {
         });
     }
 
+    /**
+     *
+     */
     private void checkPlanBasedAchievementItems(){
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
@@ -173,6 +189,9 @@ public class AchievementsFragment extends Fragment {
     }
 
 
+    /**
+     *
+     */
     private void checkFunBasedAchievementItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference funItems = database.child("Users").child(currentUserID).child("FunItems");

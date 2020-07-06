@@ -1,7 +1,7 @@
 package com.cse390.coronavirus.ui.dialogs;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,23 +9,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import com.cse390.coronavirus.MainActivity;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
-import com.cse390.coronavirus.ui.planner.PlannerFragment;
+
 
 import java.util.Date;
 
+/**
+ *
+ */
 public class PlanDialog extends DialogFragment {
     private String name, subject, description;
     private EditText planNameET, planSubjectET, planDescET;
@@ -37,6 +37,10 @@ public class PlanDialog extends DialogFragment {
     private int positionToEdit;
     private boolean checked;
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -54,6 +58,9 @@ public class PlanDialog extends DialogFragment {
 
         Button dateB = view.findViewById(R.id.date_pick_b);
         dateB.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePicker();
@@ -63,6 +70,10 @@ public class PlanDialog extends DialogFragment {
         });
 
         builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            /**
+             * @param dialog
+             * @param which
+             */
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dismiss();
@@ -70,6 +81,10 @@ public class PlanDialog extends DialogFragment {
         });
         if (isDetails){
             builder.setView(view).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                /**
+                 * @param dialog
+                 * @param which
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String name = planNameET.getText().toString();
@@ -87,6 +102,10 @@ public class PlanDialog extends DialogFragment {
             });
         }else{
             builder.setView(view).setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                /**
+                 * @param dialog
+                 * @param which
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String name = planNameET.getText().toString();
@@ -112,12 +131,24 @@ public class PlanDialog extends DialogFragment {
         return builder.create();
     }
 
+    /**
+     * @param id
+     * @param position
+     * @param checked
+     */
     public void givingDetails(String id, int position, boolean checked){
         isDetails = true;
         this.itemToEditID = id;
         this.positionToEdit = position;
         this.checked = checked;
     }
+
+    /**
+     * @param pos
+     * @param name
+     * @param subject
+     * @param description
+     */
     public void setDetails(int pos, String name, String subject, String description){
         this.pos = pos;
         this.name = name;
@@ -125,6 +156,9 @@ public class PlanDialog extends DialogFragment {
         this.description = description;
     }
 
+    /**
+     * @param c
+     */
     @Override
     public void onAttach(Context c){
         super.onAttach(c);
@@ -135,6 +169,9 @@ public class PlanDialog extends DialogFragment {
         }
     }
 
+    /**
+     *
+     */
     public interface PlanDialogListener{
         void addPlanToList(PlannerContent.PlannerItem pi);
         void editItem(String id, PlannerContent.PlannerItem pi, int position);

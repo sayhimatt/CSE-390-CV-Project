@@ -1,17 +1,10 @@
 package com.cse390.coronavirus;
-
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
-import com.cse390.coronavirus.DatabaseHelper.FunContent;
-import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
-import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
-import com.cse390.coronavirus.ui.dialogs.PlanDialog;
-import com.cse390.coronavirus.ui.planner.PlannerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,18 +13,23 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *
+ */
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private static final int SIGN_UP_ACTIVITY_CODE = 123;
     private FirebaseAuth mAuth;
     private String currentUserID;
     private Date dateSet;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
+    /**
+     *
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
+    /**
+     *
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -82,12 +86,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
+    /**
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.sign_out_mi) {
@@ -98,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * @param view
+     * @param year
+     * @param month
+     * @param dayOfMonth
+     */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -111,10 +129,16 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
+    /**
+     * @return
+     */
     public Date getDateSet() {
         return dateSet;
     }
 
+    /**
+     * @param dateSet
+     */
     public void setDateSet(Date dateSet) {
         this.dateSet = dateSet;
     }

@@ -18,9 +18,11 @@ import androidx.fragment.app.DialogFragment;
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.fun.FunFragment;
 
+/**
+ *
+ */
 public class AddFunDialog extends DialogFragment{
     private EditText funCategory, funName, funDescription;
     private FunDialogListener funDialogListener;
@@ -31,6 +33,10 @@ public class AddFunDialog extends DialogFragment{
     private boolean checked;
     private TextView titleDialog;
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -88,6 +94,14 @@ public class AddFunDialog extends DialogFragment{
         return builder.create();
     }
 
+    /**
+     * @param pos
+     * @param category
+     * @param name
+     * @param desc
+     * @param id
+     * @param checked
+     */
     public void setDetails(int pos, String category, String name, String desc, String id, boolean checked) {
         isDetails = true;
         this.category = category;
@@ -98,6 +112,9 @@ public class AddFunDialog extends DialogFragment{
         this.checked = checked;
     }
 
+    /**
+     * @param c
+     */
     @Override
     public void onAttach(Context c){
         super.onAttach(c);
@@ -107,6 +124,10 @@ public class AddFunDialog extends DialogFragment{
             throw new ClassCastException(getContext().toString() + " does not implement FunDialogListener");
         }
     }
+
+    /**
+     *
+     */
     public interface FunDialogListener{
         void addFunToList(FunContent.FunItem fi);
         void editItem(String id, FunContent.FunItem fi, int position);

@@ -30,6 +30,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *
+ */
 public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogListener {
 
     // TODO: Customize parameter argument names
@@ -49,6 +52,10 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     public PlannerFragment() {
     }
 
+    /**
+     * @param columnCount
+     * @return
+     */
     // TODO: Customize parameter initialization
     public static PlannerFragment newInstance(int columnCount) {
         PlannerFragment fragment = new PlannerFragment();
@@ -58,6 +65,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         return fragment;
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +77,12 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         }
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,6 +117,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         return view;
     }
 
+    /**
+     * @param pi
+     */
     public void addPlanToList(PlannerContent.PlannerItem pi) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("PlannerItems");
         String id = ref.push().getKey();
@@ -111,6 +130,11 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
 
     }
 
+    /**
+     * @param id
+     * @param pi
+     * @param position
+     */
     @Override
     public void editItem(String id, PlannerContent.PlannerItem pi, int position) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("PlannerItems");
@@ -120,6 +144,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         planList.getAdapter().notifyDataSetChanged();
     }
 
+    /**
+     *
+     */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -136,6 +163,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         }
     }
 
+    /**
+     *
+     */
     private void initDelete() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -159,6 +189,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         }).attachToRecyclerView(planList);
     }
 
+    /**
+     *
+     */
     private void initDialogFab() {
         // Add stuff to the object here!
         FragmentManager fm = getFragmentManager();
@@ -169,7 +202,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
     }
 
 
-
+    /**
+     * @param sortFields
+     */
     private void sortPlannerItems(ArrayList<String> sortFields){
         // Get the sortCriteria
         if (sortFields.get(1).equals("ascending")){
@@ -211,11 +246,17 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         }
     }
 
+    /**
+     *
+     */
     private void retrievePlannerItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
         DatabaseReference sortFields = database.child("Users").child(currentUserID).child("PlannerItemsSort");
         plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * @param snapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
@@ -228,6 +269,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
 
             }
 
+            /**
+             * @param error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -235,6 +279,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
         });
 
         sortFields.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * @param snapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<String> sortFields = new ArrayList<>();
@@ -248,6 +295,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
                 planList.getAdapter().notifyDataSetChanged();
             }
 
+            /**
+             * @param error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

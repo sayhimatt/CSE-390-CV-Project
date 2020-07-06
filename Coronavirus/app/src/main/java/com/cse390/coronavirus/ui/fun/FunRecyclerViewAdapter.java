@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+/**
+ *
+ */
 public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerViewAdapter.ViewHolder> {
 
     private final List<FunContent.FunItem> mValues;
@@ -32,12 +35,20 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     private FirebaseAuth mAuth;
     private String currentUserID;
 
+    /**
+     * @param items
+     * @param c
+     * @param funFragment
+     */
     public FunRecyclerViewAdapter(List<FunContent.FunItem> items, Context c, FunFragment funFragment) {
         mValues = items;
         this.c = c;
         this.funFragment = funFragment;
     }
 
+    /**
+     *
+     */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -54,6 +65,11 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         }
     }
 
+    /**
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,6 +79,10 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
     }
 
 
+    /**
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         initAuth();
@@ -72,6 +92,10 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         holder.mDescView.setText(mValues.get(position).getDescription());
 
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            /**
+             * @param v
+             * @return
+             */
             @Override
             public boolean onLongClick(View v) {
                 AddFunDialog funDialog = new AddFunDialog();
@@ -86,6 +110,9 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         });
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 AddFunDialog funDialog = new AddFunDialog();
@@ -101,6 +128,10 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         holder.completedCB.setChecked(FunContent.ITEMS.get(position).isCompleted());
 
         holder.completedCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 String id = FunContent.ITEMS.get(position).getId();
@@ -112,6 +143,9 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         });
 
         holder.hideDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 if (holder.showDetails){
@@ -127,11 +161,17 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         });
     }
 
+    /**
+     * @return
+     */
     @Override
     public int getItemCount() {
         return mValues.size();
     }
 
+    /**
+     *
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mCategoryView;
@@ -143,6 +183,9 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         public final Button editButton;
         public boolean showDetails;
 
+        /**
+         * @param view
+         */
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -155,6 +198,9 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
             showDetails = true;
         }
 
+        /**
+         * @return
+         */
         @Override
         @NonNull
         public String toString() {

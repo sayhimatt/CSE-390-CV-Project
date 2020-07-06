@@ -27,6 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 //import com.guidi.coronavirus.ui.fun.FunViewModel;
 
+/**
+ *
+ */
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel mViewModel;
@@ -37,6 +40,12 @@ public class SettingsFragment extends Fragment {
     private FirebaseAuth mAuth;
     private String currentUserID;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
@@ -68,6 +77,12 @@ public class SettingsFragment extends Fragment {
         
 
         sortListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 1){
@@ -77,6 +92,9 @@ public class SettingsFragment extends Fragment {
                 }
             }
 
+            /**
+             * @param parent
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -84,6 +102,9 @@ public class SettingsFragment extends Fragment {
         });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 String sortList = sortListSpinner.getSelectedItem().toString() + "ItemsSort";
@@ -102,6 +123,9 @@ public class SettingsFragment extends Fragment {
         return root;
     }
 
+    /**
+     *
+     */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {

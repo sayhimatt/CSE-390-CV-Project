@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.cse390.coronavirus.DatabaseHelper.AchievementContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent.DummyItem;
+
 
 import java.util.List;
 
@@ -23,10 +23,18 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
 
     private final List<AchievementContent.AchievementItem> mValues;
 
+    /**
+     * @param items
+     */
     public AchievementsRecyclerViewAdapter(List<AchievementContent.AchievementItem> items) {
         mValues = items;
     }
 
+    /**
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,6 +44,10 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
         return new ViewHolder(view);
     }
 
+    /**
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
@@ -54,11 +66,17 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
         }
     }
 
+    /**
+     * @return
+     */
     @Override
     public int getItemCount() {
         return mValues.size();
     }
 
+    /**
+     *
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
@@ -66,6 +84,9 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
         public final ImageView mAchievementImageView;
 
 
+        /**
+         * @param view
+         */
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -74,6 +95,9 @@ public class AchievementsRecyclerViewAdapter extends RecyclerView.Adapter<Achiev
             mAchievementImageView = view.findViewById(R.id.achievement_image);
         }
 
+        /**
+         * @return
+         */
         @Override
         @NonNull
         public String toString() {

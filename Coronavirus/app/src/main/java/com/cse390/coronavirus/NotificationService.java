@@ -21,6 +21,9 @@ import java.util.Date;
 import java.util.Timer ;
 import java.util.TimerTask ;
 
+/**
+ *
+ */
 public class NotificationService extends Service {
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
@@ -32,10 +35,21 @@ public class NotificationService extends Service {
     private FirebaseAuth mAuth;
     private String currentUserID;
 
+    /**
+     * @param arg0
+     * @return
+     */
     @Override
     public IBinder onBind (Intent arg0) {
         return null;
     }
+
+    /**
+     * @param intent
+     * @param flags
+     * @param startId
+     * @return
+     */
     @Override
     public int onStartCommand (Intent intent , int flags , int startId) {
         super .onStartCommand(intent , flags , startId) ;
@@ -43,6 +57,9 @@ public class NotificationService extends Service {
         return START_STICKY ;
     }
 
+    /**
+     *
+     */
     @Override
     public void onDestroy () {
 
@@ -52,18 +69,30 @@ public class NotificationService extends Service {
 
     //we are going to use a handler to be able to run in our TimerTask
     final Handler handler = new Handler() ;
+
+    /**
+     *
+     */
     public void startTimer () {
         timer = new Timer() ;
         initializeTimerTask() ;
         // 36000000
         timer.schedule( timerTask , 3600000  , Your_X_SECS * 1000 ) ;
     }
+
+    /**
+     *
+     */
     public void stopTimerTask () {
         if ( timer != null ) {
             timer .cancel() ;
             timer = null;
         }
     }
+
+    /**
+     *
+     */
     public void initializeTimerTask () {
         timerTask = new TimerTask() {
             public void run () {
@@ -76,6 +105,10 @@ public class NotificationService extends Service {
             }
         } ;
     }
+
+    /**
+     * @param numberOfItemsDueToday
+     */
     private void createNotification (long numberOfItemsDueToday) {
         String notificationContentText;
         switch ( (int) numberOfItemsDueToday ){
@@ -116,9 +149,15 @@ public class NotificationService extends Service {
         }
     }
 
+    /**
+     *
+     */
     private void alertUserOfDueItems(){
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            /**
+             * @param firebaseAuth
+             */
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
@@ -131,6 +170,9 @@ public class NotificationService extends Service {
             DatabaseReference plannerItems = database.child("Users").child(currentUserID).child("PlannerItems");
 
             plannerItems.addListenerForSingleValueEvent(new ValueEventListener() {
+                /**
+                 * @param snapshot
+                 */
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -147,6 +189,9 @@ public class NotificationService extends Service {
                     }
                 }
 
+                /**
+                 * @param error
+                 */
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 

@@ -25,6 +25,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ *
+ */
 public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecyclerViewAdapter.ViewHolder> {
     private final List<PlannerContent.PlannerItem> mValues;
     private static final String DATE_FORMAT = "EEE, d MMM yyyy";
@@ -33,12 +36,20 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
     private FirebaseAuth mAuth;
     private String currentUserID;
 
+    /**
+     * @param items
+     * @param plannerFragment
+     * @param context
+     */
     public PlannerRecyclerViewAdapter(List<PlannerContent.PlannerItem> items, PlannerFragment plannerFragment, Context context){
         mValues = items;
         this.plannerFragment = plannerFragment;
         this.c = context;
     }
 
+    /**
+     *
+     */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -55,6 +66,11 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         }
     }
 
+    /**
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,6 +79,10 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         return new ViewHolder(view);
     }
 
+    /**
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
@@ -82,6 +102,10 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         final int pos = position;
         initAuth();
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            /**
+             * @param v
+             * @return
+             */
             @Override
             public boolean onLongClick(View v) {
                 String id = PlannerContent.ITEMS.get(pos).getId();
@@ -98,6 +122,10 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         holder.completedCheckB.setChecked(PlannerContent.ITEMS.get(pos).isCompleted());
 
         holder.completedCheckB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                    String id = PlannerContent.ITEMS.get(pos).getId();
@@ -109,6 +137,9 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         });
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 String id = PlannerContent.ITEMS.get(pos).getId();
@@ -122,6 +153,9 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         });
 
         holder.hideDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 if (holder.showDetails){
@@ -139,11 +173,17 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public int getItemCount() {
         return mValues.size();
     }
 
+    /**
+     *
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView categoryView;
@@ -157,6 +197,9 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
 
         public PlannerItem mItem;
 
+        /**
+         * @param view
+         */
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -170,6 +213,9 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
             showDetails = true;
         }
 
+        /**
+         * @return
+         */
         @Override
         @NonNull
         public String toString() {

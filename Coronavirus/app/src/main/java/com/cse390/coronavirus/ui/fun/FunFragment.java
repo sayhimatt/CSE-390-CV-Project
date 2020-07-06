@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.FunContent;
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
 import com.cse390.coronavirus.R;
-import com.cse390.coronavirus.dummy.DummyContent;
 import com.cse390.coronavirus.ui.dialogs.AddFunDialog;
 import com.cse390.coronavirus.ui.dialogs.GenerateFunDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *
+ */
 public class FunFragment extends Fragment implements AddFunDialog.FunDialogListener, GenerateFunDialog.GenerateFunListener {
 
     // TODO: Customize parameter argument names
@@ -52,6 +53,10 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     public FunFragment() {
     }
 
+    /**
+     * @param columnCount
+     * @return
+     */
     // TODO: Customize parameter initialization
     public static FunFragment newInstance(int columnCount) {
         FunFragment fragment = new FunFragment();
@@ -61,6 +66,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         return fragment;
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +78,12 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         }
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,6 +135,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         return view;
     }
 
+    /**
+     *
+     */
     private void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -137,6 +154,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         }
     }
 
+    /**
+     * @param fi
+     */
     @Override
     public void addFunToList(FunContent.FunItem fi) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");
@@ -148,6 +168,11 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
+    /**
+     * @param id
+     * @param fi
+     * @param position
+     */
     @Override
     public void editItem(String id, FunContent.FunItem fi, int position) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");
@@ -157,6 +182,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
+    /**
+     *
+     */
     private void initDelete(){
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -178,6 +206,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         }).attachToRecyclerView(recyclerView);
     }
 
+    /**
+     * @param sortFields
+     */
     private void sortFunItems(ArrayList<String> sortFields){
         if (sortFields.get(1).equals("ascending")){
             switch(sortFields.get(0)){
@@ -212,11 +243,17 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         }
     }
 
+    /**
+     *
+     */
     private void retrieveFunItems() {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference funItems = database.child("Users").child(currentUserID).child("FunItems");
         DatabaseReference sortFields = database.child("Users").child(currentUserID).child("FunItemsSort");
         funItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * @param snapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot singleSnapShot : snapshot.getChildren()) {
@@ -228,6 +265,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
 
+            /**
+             * @param error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -235,6 +275,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
         });
 
         sortFields.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * @param snapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<String> sortFields = new ArrayList<>();
@@ -248,6 +291,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
 
+            /**
+             * @param error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -256,6 +302,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
     }
 
 
+    /**
+     * @param funItemsList
+     */
     @Override
     public void addFunItemsToList(List<FunContent.FunItem> funItemsList) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("FunItems");

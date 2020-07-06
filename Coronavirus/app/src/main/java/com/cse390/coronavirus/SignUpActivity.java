@@ -18,6 +18,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ *
+ */
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -26,6 +29,9 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signUpButton;
     private Button loginButton;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     */
     private void initSignUpButton(){
         signUpButton = findViewById(R.id.signup_btn);
         emailEditText = findViewById(R.id.email_edt_text);
@@ -47,6 +56,9 @@ public class SignUpActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_btn);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
@@ -75,6 +87,9 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
