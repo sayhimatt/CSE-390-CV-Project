@@ -67,7 +67,7 @@ public class FunContent {
 
         public FunItem(){}
 
-        public FunItem(String category, String description, String name, boolean completed, String id){
+        public FunItem(String category, String name,String description, boolean completed, String id){
             this.category = category;
             this.name = name;
             this.description = description;
