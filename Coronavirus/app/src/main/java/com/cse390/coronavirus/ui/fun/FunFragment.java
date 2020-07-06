@@ -231,7 +231,9 @@ public class FunFragment extends Fragment implements AddFunDialog.FunDialogListe
                     String item = singleSnapShot.getValue(String.class);
                     sortFields.add(item.toLowerCase());
                 }
-                sortFunItems(sortFields);
+                if (sortFields.size() > 0){
+                    sortFunItems(sortFields);
+                }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
 

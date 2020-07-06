@@ -241,7 +241,9 @@ public class PlannerFragment extends Fragment implements PlanDialog.PlanDialogLi
                     String item = singleSnapShot.getValue(String.class);
                     sortFields.add(item.toLowerCase());
                 }
-                sortPlannerItems(sortFields);
+                if (sortFields.size() > 0){
+                    sortPlannerItems(sortFields);
+                }
                 planList.getAdapter().notifyDataSetChanged();
             }
 
