@@ -1,4 +1,3 @@
-<center>
 # CSE-390-CV-Project
 
 
@@ -37,4 +36,4 @@ Fun Achievement Icon 2:
 <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br>
 Fun Achievement Icon 3:
 <a href="https://www.flaticon.com/free-icon/recommended_3163306" title="photo3idea_studio">photo3idea_studio</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br> 
-</center>
+
