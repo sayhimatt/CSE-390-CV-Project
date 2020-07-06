@@ -65,9 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/default_edit_action"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -96,9 +94,7 @@
 
                 android:layout_weight="0"
                 android:text="@string/default_hide_description"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
