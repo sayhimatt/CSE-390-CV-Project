@@ -19,7 +19,17 @@
             android:layout_toStartOf="@id/relativeLayout">
 
             <TextView
-                android:id="@+id/category_tv"
+                android:id="@+id/plan_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="57dp"
+                android:layout_toEndOf="@id/subject_tv"
+                android:text="@string/filler_matt_s"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/subject_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -28,23 +38,13 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="57dp"
-                android:layout_toEndOf="@id/category_tv"
-                android:text="@string/filler_matt_s"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textSize="15sp" />
-
-            <TextView
                 android:id="@+id/due_date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/name_tv"
+                android:layout_below="@id/subject_tv"
                 android:layout_marginStart="58dp"
                 android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/category_tv"
+                android:layout_toEndOf="@id/plan_tv"
                 android:text="@string/filler_matt_s"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="15sp" />
@@ -56,7 +56,7 @@
                 android:layout_below="@id/due_date_tv"
                 android:layout_marginStart="52dp"
                 android:layout_marginTop="4dp"
-                android:layout_toEndOf="@id/category_tv"
+                android:layout_toEndOf="@id/plan_tv"
                 android:clickable="true"
                 android:paddingLeft="0dp"
                 android:singleLine="true"
@@ -67,7 +67,7 @@
                 android:id="@+id/desc_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/category_tv"
+                android:layout_below="@id/plan_tv"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/filler_matt_s"

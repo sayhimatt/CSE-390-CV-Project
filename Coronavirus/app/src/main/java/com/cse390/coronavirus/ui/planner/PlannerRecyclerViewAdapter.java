@@ -10,9 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse390.coronavirus.DatabaseHelper.PlannerContent;
@@ -161,8 +158,8 @@ public class PlannerRecyclerViewAdapter extends RecyclerView.Adapter<PlannerRecy
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            categoryView = view.findViewById(R.id.category_tv);
-            subjectView =  view.findViewById(R.id.name_tv);
+            categoryView = view.findViewById(R.id.plan_tv);
+            subjectView =  view.findViewById(R.id.subject_tv);
             descriptionView = view.findViewById(R.id.desc_tv);
             dateView = view.findViewById(R.id.due_date_tv);
             completedCheckB = view.findViewById(R.id.completed_cb);

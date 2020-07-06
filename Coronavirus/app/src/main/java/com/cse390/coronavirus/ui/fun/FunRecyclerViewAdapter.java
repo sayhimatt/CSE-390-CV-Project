@@ -76,8 +76,8 @@ public class FunRecyclerViewAdapter extends RecyclerView.Adapter<FunRecyclerView
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mCategoryView = view.findViewById(R.id.category_tv);
-            mNameView = view.findViewById(R.id.name_tv);
+            mCategoryView = view.findViewById(R.id.plan_tv);
+            mNameView = view.findViewById(R.id.subject_tv);
             mDescView = view.findViewById(R.id.descf_tv);
             completedCB = view.findViewById(R.id.completedf_cb);
         }
