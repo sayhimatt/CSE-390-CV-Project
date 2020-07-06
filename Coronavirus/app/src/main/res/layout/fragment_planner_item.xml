@@ -1,98 +1,113 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="15dp"
-    app:cardElevation="15dp"
-    app:cardCornerRadius="10dp">
-    
+    app:cardCornerRadius="10dp"
+    app:cardElevation="15dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-   >
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/category_tv"
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filler_matt_s"
-            android:textSize="15sp"
-            android:layout_marginStart="5dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/relativeLayout">
 
-        <TextView
-            android:id="@+id/name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="57dp"
-            android:layout_toEndOf="@id/category_tv"
-            android:text="@string/filler_matt_s"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/category_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/filler_matt_s"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/due_date_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name_tv"
-            android:layout_marginStart="58dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@id/category_tv"
-            android:text="@string/filler_matt_s"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="57dp"
+                android:layout_toEndOf="@id/category_tv"
+                android:text="@string/filler_matt_s"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="15sp" />
 
-        <CheckBox
-            android:id="@+id/completed_cb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/due_date_tv"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="4dp"
-            android:layout_toEndOf="@id/category_tv"
-            android:clickable="true"
-            android:paddingLeft="0dp"
-            android:singleLine="true"
-            android:text="@string/completed_s"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/due_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_tv"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/category_tv"
+                android:text="@string/filler_matt_s"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/desc_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/filler_matt_s"
-            android:layout_below="@id/category_tv"
-            android:textSize="15sp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            <CheckBox
+                android:id="@+id/completed_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/due_date_tv"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@id/category_tv"
+                android:clickable="true"
+                android:paddingLeft="0dp"
+                android:singleLine="true"
+                android:text="@string/completed_s"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category_tv"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/filler_matt_s"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="15sp" />
 
 
-   </RelativeLayout>
+        </RelativeLayout>
 
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end">
-        <Button
-            android:id="@+id/edit_item_button_planner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/default_edit_action" />
-        <Button
-            android:id="@+id/hide_description_button_planner"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_below="@id/edit_item_button_planner"
-            android:text="@string/default_hide_description" />
+            android:layout_alignParentEnd="true">
+
+            <Button
+                android:id="@+id/edit_item_button_planner"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/default_edit_action"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/hide_description_button_planner"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_item_button_planner"
+                android:layout_gravity="end"
+                android:text="@string/default_hide_description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </RelativeLayout>
-
-
-
-
 
 
 </androidx.cardview.widget.CardView>
