@@ -30,7 +30,7 @@
 
 ### Our database (Firebase) takes in many attributes
 ### Refer to the image below for reference
-
+![Firebase References](/readme_images/database_proof.png)
 
 
 
