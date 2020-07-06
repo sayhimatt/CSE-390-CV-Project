@@ -38,7 +38,9 @@ password: grading<br>
 ![Firebase References](/readme_images/database_proof.png)
 
 ### A Java doc has been generated inside the doc folder!
-
+### Add two more plans and mark them as completed! 
+### By completing 5 plans you'll get another achievement
+### Completing 10 plans gets you another achievement to view
 
 ### All images displayed in our application
 ![Achievements](/readme_images/achievements.png)
