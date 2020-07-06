@@ -4,6 +4,24 @@
 ## Coronavirus project 
 
 
+### We have at least 3 activities
+### Here are the main ones:
+ <ul>
+  <li>Planner view</li>
+  <li>Fun Activities view</li>
+  <li>Achievements view</li>
+</ul> 
+
+
+
+
+
+
+
+
+
+
+
 
 Image credits:<br>
 Gear Icon:
